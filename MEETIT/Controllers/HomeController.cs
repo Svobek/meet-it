@@ -23,6 +23,21 @@ namespace meetit.Controllers
             return View();
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
+        {
+            if (id == 1)
+            {
+                return "Hello";
+            }
+            else
+            {
+                return "World";
+            }
+            
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -30,11 +45,9 @@ namespace meetit.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            // Logika obs³ugi ¿¹dania GET z identyfikatorem
-            return "Hello World";
-        }
+        
+
+        
+      
     }
 }
