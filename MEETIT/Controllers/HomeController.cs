@@ -28,5 +28,13 @@ namespace meetit.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
+        {
+            // Logika obs³ugi ¿¹dania GET z identyfikatorem
+            return "Hello World";
+        }
     }
 }

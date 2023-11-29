@@ -3,7 +3,7 @@
     public class Users
     {
         public int id { get; set; }
-        public string login { get; set; }
-        public string haslo { get; set; }
+        public required string login { get; set; }
+        public required string haslo { get; set; }
     }
 }
