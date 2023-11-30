@@ -23,20 +23,7 @@ namespace meetit.Controllers
             return View();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            if (id == 1)
-            {
-                return "Hello";
-            }
-            else
-            {
-                return "World";
-            }
-            
-        }
-
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

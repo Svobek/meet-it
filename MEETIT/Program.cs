@@ -1,4 +1,13 @@
+using meetit.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -13,6 +22,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -23,6 +34,22 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "test",
+    pattern: "{controller=Test}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "test1",
+    pattern: "{controller=Test}/{action=Json}/{id?}");
+
+app.MapControllerRoute(
+    name: "UserTest",
+    pattern: "{controller=User}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "UserTest1",
+    pattern: "{controller=User}/{action=CreateUser}/{id?}");
 
 
 

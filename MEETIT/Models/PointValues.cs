@@ -1,7 +1,10 @@
-﻿namespace meetit.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace meetit.Models
 {
     public class PointValues
     {
+        [Key]
         public int idPointValues { get; set; }
         public float idPoint { get; set; }
         public float Price { get; set; }

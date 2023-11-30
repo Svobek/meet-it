@@ -1,4 +1,6 @@
-﻿namespace meetit.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace meetit.Models
 {
     public class Users_Tracks
     {

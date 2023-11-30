@@ -2,6 +2,8 @@
 
 namespace meetit.Models
 {
+    
+
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -12,5 +14,16 @@ namespace meetit.Models
         public DbSet<Users_Tracks> Users_Tracks { get; set; }
         public DbSet<PointValues> PointValues { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Users_Tracks>()
+                .HasKey(ut => new { ut.idUsers, ut.idTracks });
+        }
+
     }
+
+    
+    
+    
+
 }

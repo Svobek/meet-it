@@ -1,7 +1,10 @@
-﻿namespace meetit.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace meetit.Models
 {
     public class Points
     {
+        [Key]
         public int PointID { get; set; }
         public int TrackID { get; set; }
         public required string PointInTrackID { get; set; }
