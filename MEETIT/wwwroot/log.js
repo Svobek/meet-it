@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loginUser() {
-    var apiUrl = 'https://localhost:7168/User/Login/';
+    var apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
 
     // Get values from input fields
     var loginValue = document.getElementById('loginUser').value;
