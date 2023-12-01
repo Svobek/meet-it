@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function addUser() {
-    var apiUrl = 'https://meeetit.azurewebsites.net/User/AddUser/';
+    var apiUrl = 'https://localhost:7168/User/AddUser/';
 
     // Get values from input fields
     var loginValue = document.getElementById('user').value;
@@ -37,10 +37,15 @@ function addUser() {
         console.log('Status: ', response.status);
         return response.json();
     })
+    // ...
     .then(data => {
         console.log('User added successfully:', data);
+        alert('Konto utworzone'); // Dodaj komunikat
+        window.location.href = 'logowanie.html'; // Przekieruj do strony logowanie.html
     })
+    // ...
     .catch(error => {
         console.error('Error:', error);
     });
+
 }
