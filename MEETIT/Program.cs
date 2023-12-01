@@ -44,16 +44,20 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "AddUser",
-    pattern: "{controller=User}/{action=AddUser}/{id?}");
+    pattern: "{controller=User}/{action=AddUser}/");
 
 
 app.MapControllerRoute(
-       name: "GetUserById",
-          pattern: "{controller=User}/{action=GetUserById}/{id?}");
+    name: "GetUserById",
+    pattern: "{controller=User}/{action=GetUserById}/{id?}");
 
 app.MapControllerRoute(
-       name: "UserTest4",
-          pattern: "{controller=User}/{action=UpdateU}/");
+    name: "UpdatePassword",
+    pattern: "{controller=User}/{action=UpdateU}/");
+
+app.MapControllerRoute(
+    name: "Login",
+    pattern: "{controller=User}/{action=Login}/");
 
 
 
