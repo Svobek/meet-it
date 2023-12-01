@@ -6,10 +6,12 @@
     <title>MEET-IT | Tworzenie wyjazdu</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="/images/ico.png" type="image/x-icon" />
-    <script
+    <!--
+        <script
       async
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZQgxv25bFuG9dDT9t7Fz9_7M6C1enjY&callback=initMap&libraries=maps,marker,places&v=beta"
     ></script>
+    -->
   </head>
 
   <body>
@@ -37,11 +39,12 @@
     </div>
     <div class="content">
       <div class="mapa">
+        <!--
         <div class="wyszukaj">
           <input
             class="search"
             type="text"
-            placeholder="Wyszukaj w Mapach Google"
+            placeholder=""
             id="location-input"
           />
           <button class="button-cta">
@@ -52,23 +55,103 @@
               alt=""
             />
           </button>
-        </div>
-        <div class="map" id="gmp-map">
-          <gmp-map
-            center="53.1235000,18.0076200 "
-            zoom="9"
-            map-id="DEMO_MAP_ID"
-          >
-            <gmp-advanced-marker
-              position="53.1235000,18.0076200 "
-              title="My location"
-            >
-            </gmp-advanced-marker>
-          </gmp-map>
-        </div>
+        </div>-->
+        <!--
+          <div class="map" id="gmp-map"></div>
+        -->
+        <input
+          id="pac-input"
+          class="controls"
+          type="text"
+          placeholder="Wyszukaj w Mapach Google"
+        />
+
+        <div id="map"></div>
       </div>
       <div class="panel">
-        <div class="tworzenie">
+        <div class="panel-wyjazdu">
+          <div class="box2">
+            <input class="input-panel input-p" type="text" placeholder="Kraj" />
+            <input
+              id="location-input"
+              class="input-panel input-p"
+              type="text"
+              placeholder="Miasto"
+            />
+            <input
+              class="input-panel input-p"
+              type="text"
+              placeholder="Województwo"
+            />
+            <input
+              class="input-panel input-p"
+              type="text"
+              placeholder="Adres"
+            />
+          </div>
+          <div class="box3">
+            <input class="input-panel input-p" type="text" placeholder="Cel" />
+            <input
+              id="ilosc-osob"
+              class="input-panel input-osoby"
+              type="number"
+              placeholder="Ilość osób"
+            />
+            <input
+              id="osoby"
+              class="input-panel input-cena"
+              type="text"
+              placeholder="Osoby"
+            />
+          </div>
+          <div class="box4">
+            <input
+              id="budzet"
+              class="input-panel input-budzet"
+              type="number"
+              placeholder="Budżet"
+            />
+            <input
+              id="koszty"
+              class="input-panel input-koszt"
+              type="number"
+              placeholder="Koszt Wyjazdu"
+            />
+            <input
+              id="koszt-osoba"
+              class="input-panel input-kosztnaosobe"
+              type="text"
+              placeholder="Koszt na Osobe"
+              readonly
+            />
+          </div>
+
+          <div class="oddo">
+            <div class="poczatek">
+              <label for="" style="color: white">Start Wyjazdu</label>
+              <input
+                id="data-start-wyjazdu"
+                type="date"
+                id="start"
+                name="trip-start"
+              />
+              <input id="czas-start-wyjazdu" type="time" name="" id="" /><br />
+            </div>
+            <div class="zakonczenie">
+              <label for="" style="color: white">Koniec Wyjazdu</label>
+              <input
+                id="data-kaniec-wyjazdu"
+                type="date"
+                id="end"
+                name="trip-end"
+              />
+              <input id="czas-start-wyjazdu" type="time" name="" id="" />
+            </div>
+          </div>
+          <textarea class="panel-opis" placeholder="opis"></textarea>
+        </div>
+        <button id="dojazd">dojazd</button>
+        <div class="zapisywanie">
           <button class="zapisz" id="zapisz">Zapisz</button>
         </div>
       </div>
@@ -102,9 +185,9 @@
           /></a>
         </div>
         <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/tt.png" alt=""
-          /></a>
+          <a href="wkrótce.html">
+            <img class="img-social" src="images/tt.png" alt="" />
+          </a>
         </div>
       </div>
       <div class="czasidata">
@@ -112,7 +195,11 @@
         <p id="data"></p>
       </div>
     </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZQgxv25bFuG9dDT9t7Fz9_7M6C1enjY&callback=initAutocomplete&libraries=places&v=weekly"
+      defer
+    ></script>
     <script src="app.js"></script>
-    <script src="map.js"></script>
+    <script src="maps.js"></script>
   </body>
 </html>

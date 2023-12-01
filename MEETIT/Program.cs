@@ -23,9 +23,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
-
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseDefaultFiles();
@@ -46,9 +43,18 @@ app.MapControllerRoute(
 
 
 app.MapControllerRoute(
-    name: "UserTest1",
+    name: "AddUser",
     pattern: "{controller=User}/{action=AddUser}/{id?}");
 
 
+app.MapControllerRoute(
+       name: "GetUserById",
+          pattern: "{controller=User}/{action=GetUserById}/{id?}");
 
-app.Run();
+app.MapControllerRoute(
+       name: "UserTest4",
+          pattern: "{controller=User}/{action=UpdateU}/");
+
+
+
+ app.Run();

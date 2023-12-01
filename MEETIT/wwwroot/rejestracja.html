@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formularz Logowania</title>
+    <link rel="stylesheet" href="style-log.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="bg__dot"><img class="a-img" src="images/bed.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/car.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/cash.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/home.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/point.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/szcz.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/sun.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/glass.png" /></div>
+    </div>
+    <form autocomplete="off">
+      <h1><i>MEET-IT</i></h1>
+      <div class="form_input-container">
+        <input
+          class="main-input"
+          id="user"
+          aria-label="User"
+          type="text"
+          placeholder=" "
+        />
+        <label class="dane" for="user">Login</label>
+      </div>
+      <div class="form_input-container">
+        <input
+          class="main-input"
+          id="password"
+          aria-label="Password"
+          type="password"
+          placeholder=" "
+        />
+        <label class="dane" for="password">Hasło</label>
+      </div>
+      <div class="form_input-container">
+        <input
+          class="main-input"
+          id="password2"
+          aria-label="Password"
+          type="password"
+          placeholder=" "
+        />
+        <label class="dane" for="password"> Powtórz Hasło</label>
+      </div>
+      <button id="addUser" class="b-log">Zarejestruj</button>
+      <div class="spacer">
+        <div class="form_spacer-rej" aria-hidden="true"></div>
+        <h4 class="h4-rej">Zarejestruj się za pomocą</h4>
+        <div class="form_spacer-rej" aria-hidden="true"></div>
+      </div>
+
+      <button class="google">
+        <img class="img_gg" src="images/gg.png" alt="" />
+        <h5>Zarejestruj przez Google</h5>
+      </button>
+    </form>
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              document.getElementById('addUser').addEventListener('click', function () {
+                  addUser();
+              });
+          });
+
+          function addUser() {
+              var apiUrl = 'https://localhost:7168/User/AddUser/'; // Zastąp odpowiednim adresem API
+              
+              // Get values from input fields
+              var loginValue = document.getElementById('user').value;
+              var passwordValue = document.getElementById('password').value;
+              console.log(loginValue);
+              console.log(passwordValue);
+              // Validate input values (you may want to add more validation)
+              if (!loginValue || !passwordValue) {
+                  console.error('Login and password are required');
+                  return;
+              }
+
+              var user = {
+                  login: loginValue,
+                  psswd: passwordValue
+                  // Add other user properties as needed
+              };
+
+              fetch(apiUrl, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(user)
+              })
+                  .then(response => {
+                      if (!response.ok) {
+                          throw new Error(`HTTP error! Status: ${response.status}`);
+                      }
+                      console.log('Status: ' ,response.status);
+                      return response.json();
+                  })
+                  .then(data => {
+                      console.log('Użytkownik został dodany pomyślnie:', data);
+                  })
+                  .catch(error => {
+                      console.error('Błąd:', error);
+                  });
+          }
+      </script>
+      
+  </body>
+</html>

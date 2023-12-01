@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using BCrypt.Net;
 
 
 namespace meetit.Controllers
@@ -15,43 +16,66 @@ namespace meetit.Controllers
             _context = context;
         }
 
-
-
-
-
-        /*public IActionResult CreateUser()
-        {
-            var user = new Users
-            {
-                id = 1,
-                login = "Jan",
-                psswd = "Kowalski123",
-            };
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
+        
 
         public IActionResult AddUser([FromBody] Users users)
         {
+            
+            //get last user id from database use order by
+            var lastId = _context.Users.OrderByDescending(u => u.id).FirstOrDefault().id;
+            users.id = lastId + 1;
+            //hash password
+            users.psswd = BCrypt.Net.BCrypt.HashPassword(users.psswd);
+
             if (users == null)
             {
                 return BadRequest("Invalid user data");
             }
 
-            // Sprawdź, czy użytkownik o podanym e-mailu już istnieje
+            // Sprawdź, czy użytkownik o podanym loginie już istnieje
             if (_context.Users.Any(u => u.login == users.login))
             {
                 return Conflict("User with this login already exists");
             }
 
-            // Dodaj użytkownika do bazy danych
             _context.Users.Add(users);
             _context.SaveChanges();
 
             return Ok("User added successfully");
         }
 
+        
+        /*public IActionResult GetUserById(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.id == id);
+            return Ok(user);
+        }*/
+
+
+        public IActionResult UpdateU([FromBody] Users users)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.login == users.login);
+            user.psswd = users.psswd;
+            _context.SaveChanges();
+            return Ok("Password updated successfully");
+        }
+
+        //write method to login user
+        public IActionResult Login([FromBody] Users users)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.login == users.login);
+            if (user == null)
+            {
+                return BadRequest("Invalid login or password");
+            }
+            if (BCrypt.Net.BCrypt.Verify(users.psswd, user.psswd))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Invalid login or password");
+            }
+        }
     }
 }

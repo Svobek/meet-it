@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formularz Logowania</title>
+    <link rel="stylesheet" href="style-log.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="bg__dot"><img class="a-img" src="images/bed.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/car.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/cash.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/home.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/point.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/szcz.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/sun.png" /></div>
+      <div class="bg__dot"><img class="a-img" src="images/glass.png" /></div>
+    </div>
+
+    <form>
+      <!-- <div class="opction">
+        <div class="zaloguj-buttom">Zaloguj</div>
+        <div class="rejestruj-buttom">Zarejestruj</div>
+      </div>-->
+
+      <h1><i>MEET-IT</i></h1>
+      <div class="form_input-container">
+        <input
+          class="main-input"
+          id="user"
+          aria-label="User"
+          type="text"
+          placeholder=" "
+        />
+        <label class="dane" for="user">Login</label>
+      </div>
+      <div class="form_input-container">
+        <input
+          class="main-input"
+          id="password"
+          aria-label="Password"
+          type="password"
+          placeholder=" "
+        />
+        <label class="dane" for="password">Hasło</label>
+      </div>
+      <div class="check-zap">
+        <div class="check">
+          <input type="checkbox" id="remember" />
+          <h2>Zapamietaj mnie.</h2>
+        </div>
+        <div class="brak-konta">
+          <h3>
+            <a href="rejestracja.html">Nie masz konta? Zarejestruj sie!</a>
+          </h3>
+        </div>
+      </div>
+      <button class="b-log">Login</button>
+      <div class="spacer">
+        <div class="form_spacer" aria-hidden="true"></div>
+        <h4>Zaloguj się za pomocą</h4>
+        <div class="form_spacer" aria-hidden="true"></div>
+      </div>
+
+      <button class="google">
+        <img class="img_gg" src="images/gg.png" alt="" />
+        <h5>Zaloguj przez Google</h5>
+      </button>
+    </form>
+    <script src="app.js"></script>
+  </body>
+</html>
