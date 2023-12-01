@@ -15,7 +15,6 @@
       <div class="bg__dot"><img class="a-img" src="images/home.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/point.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/szcz.png" /></div>
-      <div class="bg__dot"><img class="a-img" src="images/sun.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/glass.png" /></div>
     </div>
 
@@ -29,35 +28,25 @@
       <div class="form_input-container">
         <input
           class="main-input"
-          id="user"
+          id="loginUser"
           aria-label="User"
           type="text"
           placeholder=" "
         />
-        <label class="dane" for="user">Login</label>
-      </div>
-      <div class="form_input-container">
+        <label class="dane" for="loginUser">Login</label>
+    </div>
+    <div class="form_input-container">
         <input
           class="main-input"
-          id="password"
+          id="loginPassword"
           aria-label="Password"
           type="password"
           placeholder=" "
         />
-        <label class="dane" for="password">Hasło</label>
-      </div>
-      <div class="check-zap">
-        <div class="check">
-          <input type="checkbox" id="remember" />
-          <h2>Zapamietaj mnie.</h2>
-        </div>
-        <div class="brak-konta">
-          <h3>
-            <a href="rejestracja.html">Nie masz konta? Zarejestruj sie!</a>
-          </h3>
-        </div>
-      </div>
-      <button class="b-log">Login</button>
+        <label class="dane" for="loginPassword">Hasło</label>
+    </div>
+    <button id="loginButton">Log in</button>
+    <p id="loginErrorMessage" style="color: red;"></p>
       <div class="spacer">
         <div class="form_spacer" aria-hidden="true"></div>
         <h4>Zaloguj się za pomocą</h4>
@@ -69,6 +58,6 @@
         <h5>Zaloguj przez Google</h5>
       </button>
     </form>
-    <script src="app.js"></script>
+    <script src="log.js"></script>
   </body>
 </html>

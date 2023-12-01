@@ -15,7 +15,6 @@
       <div class="bg__dot"><img class="a-img" src="images/home.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/point.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/szcz.png" /></div>
-      <div class="bg__dot"><img class="a-img" src="images/sun.png" /></div>
       <div class="bg__dot"><img class="a-img" src="images/glass.png" /></div>
     </div>
     <form autocomplete="off">
@@ -43,7 +42,7 @@
       <div class="form_input-container">
         <input
           class="main-input"
-          id="password2"
+          id="return-password"
           aria-label="Password"
           type="password"
           placeholder=" "
@@ -62,55 +61,6 @@
         <h5>Zarejestruj przez Google</h5>
       </button>
     </form>
-      <script>
-          document.addEventListener('DOMContentLoaded', function () {
-              document.getElementById('addUser').addEventListener('click', function () {
-                  addUser();
-              });
-          });
-
-          function addUser() {
-              var apiUrl = 'https://localhost:7168/User/AddUser/'; // Zastąp odpowiednim adresem API
-              
-              // Get values from input fields
-              var loginValue = document.getElementById('user').value;
-              var passwordValue = document.getElementById('password').value;
-              console.log(loginValue);
-              console.log(passwordValue);
-              // Validate input values (you may want to add more validation)
-              if (!loginValue || !passwordValue) {
-                  console.error('Login and password are required');
-                  return;
-              }
-
-              var user = {
-                  login: loginValue,
-                  psswd: passwordValue
-                  // Add other user properties as needed
-              };
-
-              fetch(apiUrl, {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(user)
-              })
-                  .then(response => {
-                      if (!response.ok) {
-                          throw new Error(`HTTP error! Status: ${response.status}`);
-                      }
-                      console.log('Status: ' ,response.status);
-                      return response.json();
-                  })
-                  .then(data => {
-                      console.log('Użytkownik został dodany pomyślnie:', data);
-                  })
-                  .catch(error => {
-                      console.error('Błąd:', error);
-                  });
-          }
-      </script>
-      
+    <script src="rej.js"></script>
   </body>
 </html>
