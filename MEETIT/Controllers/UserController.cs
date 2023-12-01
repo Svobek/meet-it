@@ -77,5 +77,15 @@ namespace meetit.Controllers
                 return BadRequest("Invalid login or password");
             }
         }
+        //write method to print all users on website
+        public IActionResult GetAllUsers()
+        {
+            var users = _context.Users.ToList();
+            return Ok(users);
+        }
+        
+
+
+       
     }
 }

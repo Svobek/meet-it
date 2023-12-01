@@ -59,6 +59,10 @@ app.MapControllerRoute(
     name: "Login",
     pattern: "{controller=User}/{action=Login}/");
 
+app.MapControllerRoute(
+    name: "GetAllUsers",
+    pattern: "{controller=User}/{action=GetAllUsers}/");
+
 
 
  app.Run();
