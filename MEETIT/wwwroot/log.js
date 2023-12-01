@@ -40,7 +40,7 @@ function loginUser() {
         if (data.success) {
             console.log('Login successful:', data);
             // Redirect to the desired page after successful login
-            window.location.href = 'desiredPage.html';
+            window.location.href = 'index.html';
         } else {
             console.error('Login failed. Incorrect username or password. Try again.');
             // Display an error message on the page
