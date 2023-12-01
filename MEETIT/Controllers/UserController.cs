@@ -15,16 +15,11 @@ namespace meetit.Controllers
             _context = context;
         }
 
-        
-        public IActionResult Index()
-        {
-            // Akcja, która zwraca widok z listą postów
-            var Users = _context.Users.ToList();
-            return View(Users);
-        }
 
-        
-        public IActionResult CreateUser()
+
+
+
+        /*public IActionResult CreateUser()
         {
             var user = new Users
             {
@@ -36,6 +31,26 @@ namespace meetit.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }*/
+
+        public IActionResult AddUser([FromBody] Users users)
+        {
+            if (users == null)
+            {
+                return BadRequest("Invalid user data");
+            }
+
+            // Sprawdź, czy użytkownik o podanym e-mailu już istnieje
+            if (_context.Users.Any(u => u.login == users.login))
+            {
+                return Conflict("User with this login already exists");
+            }
+
+            // Dodaj użytkownika do bazy danych
+            _context.Users.Add(users);
+            _context.SaveChanges();
+
+            return Ok("User added successfully");
         }
 
     }

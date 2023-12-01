@@ -7,12 +7,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\nowywyjazd.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\app.js" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\kontakt.html" />
+    <None Include="wwwroot\map-pkt.js" />
+    <None Include="wwwroot\map.js" />
+    <None Include="wwwroot\nowywyjazd.html" />
+    <None Include="wwwroot\README.md" />
+    <None Include="wwwroot\style-log.css" />
+    <None Include="wwwroot\style-wk.css" />
+    <None Include="wwwroot\style.css" />
+    <None Include="wwwroot\team.html" />
+    <None Include="wwwroot\twojwyjazd.html" />
+    <None Include="wwwroot\wkrótce.html" />
+    <None Include="wwwroot\wyjazdy.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
   </ItemGroup>
 
 </Project>

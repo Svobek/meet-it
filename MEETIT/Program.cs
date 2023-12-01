@@ -10,9 +10,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -24,16 +25,16 @@ if (!app.Environment.IsDevelopment())
 
 
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseDefaultFiles();
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseFileServer(enableDirectoryBrowsing: true);
 
 app.MapControllerRoute(
     name: "test",
@@ -43,13 +44,10 @@ app.MapControllerRoute(
     name: "test1",
     pattern: "{controller=Test}/{action=Json}/{id?}");
 
-app.MapControllerRoute(
-    name: "UserTest",
-    pattern: "{controller=User}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "UserTest1",
-    pattern: "{controller=User}/{action=CreateUser}/{id?}");
+    pattern: "{controller=User}/{action=AddUser}/{id?}");
 
 
 
