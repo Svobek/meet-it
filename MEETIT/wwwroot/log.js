@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginButton').addEventListener('click', function () {
         loginUser();
@@ -5,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loginUser() {
-    var apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
-
+    var apiUrl = 'https://meeeetit.azurewebsites.net/User/Login/';
     // Get values from input fields
     var loginValue = document.getElementById('loginUser').value;
     var passwordValue = document.getElementById('loginPassword').value;
