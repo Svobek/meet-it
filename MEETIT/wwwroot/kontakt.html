@@ -32,27 +32,33 @@
     <div class="container">
       <div class="kontakt">
         <div class="email">
-          Email:<input type="email" placeholder="Twoja Email" />
-        </div>
-        <div class="temat">
-          Temat:<input type="text" placeholder="Temat Wiadomości" />
-        </div>
-        <div class="tresc">
-          <input
-            class="tresc-wiadomosci"
-            type="text"
-            placeholder="Terść Wiadomości"
+          Email:<input
+            class="main-input"
+            type="email"
+            placeholder=" Twoj Email"
           />
         </div>
+        <div class="temat">
+          Temat:<input
+            class="main-input"
+            type="text"
+            placeholder=" Temat Wiadomości"
+          />
+        </div>
+        <div class="tresc">
+          <textarea
+            class="tresc-wiadomosci"
+            placeholder="Terść Wiadomości"
+          ></textarea>
+        </div>
         <form action="/twoj_serwer" method="post" enctype="multipart/form-data">
-          <input class="wyslij" type="submit" value="Wyślij" />
+          <input class="wyslij bw" type="submit" value="Wyślij" />
           <label for="file-upload">Wybierz plik:</label>
           <input type="file" id="file-upload" name="file-upload" />
         </form>
       </div>
     </div>
     <div class="footer">
-      <a class="link" href="team.html"><div class="strony">Nasz Team</div></a>
       <div class="social">
         <p class="nasze-sociale">Nasze Social Media:</p>
         <div class="i-social">
@@ -78,6 +84,11 @@
         <div class="i-social">
           <a href="wkrótce.html"
             ><img class="img-social" src="images/dc.png" alt=""
+          /></a>
+        </div>
+        <div class="i-social">
+          <a href="wkrótce.html"
+            ><img class="img-social" src="images/tt.png" alt=""
           /></a>
         </div>
       </div>
