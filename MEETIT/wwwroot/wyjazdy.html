@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MEET-IT | Lista wyjazdów</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="/images/ico.png" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="header">
+      <a class="meetit-nw" href="index.html">MEET-IT</a>
+      <div class="menu-nw">
+        <a class="link" href="nowywyjazd.html">
+          <div class="strony">Zaplanuj wyjazd</div>
+        </a>
+        <a class="link" href="wyjazdy.html">
+          <div class="strony">Twoje wyjazdy</div>
+        </a>
+        <a class="link" href="kontakt.html">
+          <div class="strony">Kontakt</div>
+        </a>
+        <a class="link" href="team.html">
+          <div class="strony">Nasz Team</div>
+        </a>
+      </div>
+      <div class="logout">
+        <button class="wyloguj">
+          <a class="out" href="logowanie.html">Wyloguj</a>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="twoje-wyjazdy">
+        <div class="header-tw">TWOJE WYJAZDY</div>
+        <div class="pasek">
+          <div class="kat" style="background: rgb(0, 0, 78)">
+            <div class="info cel-wyjazdu">Cel Wyjazdu</div>
+            <div class="info data-wyjazdu">Data wyjazdu (od/do)</div>
+            <div class="info miejsce-wyjazdu">Miejsce wyjazdu</div>
+            <div class="info koszty-wyjazdu">Koszty Wyjazdu</div>
+            <div class="info ilosc-osob">Ilość osób</div>
+            <div class="info opis">Opis</div>
+          </div>
+          <div
+            class="lupa"
+            title="Podejrzyj wyjad"
+            style="background: none"
+          ></div>
+        </div>
+        <div class="pasek">
+          <div class="kat">
+            <div class="info cel-wyjazdu">Wakacje</div>
+            <div class="info data-wyjazdu">13.02.2019 - 09.11.2020</div>
+            <div class="info miejsce-wyjazdu">warszawa</div>
+            <div class="info koszty-wyjazdu">10 203,20 zł</div>
+            <div class="info ilosc-osob">10</div>
+            <div class="info opis"></div>
+          </div>
+          <div class="lupa" title="Podejrzyj wyjad">
+            <a href="twojwyjazd.html"
+              ><img class="img-lupa" src="images/lupa.png" alt=""
+            /></a>
+          </div>
+        </div>
+        <div class="lista-wyjazdow"></div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="social">
+        <p class="nasze-sociale">Nasze Social Media:</p>
+        <div class="i-social">
+          <a href="comingsoon.html"
+            ><img class="img-social" src="images/f.png" alt=""
+          /></a>
+        </div>
+        <div class="i-social">
+          <a href="wkrótce.html"
+            ><img class="img-social" src="images/x.png" alt=""
+          /></a>
+        </div>
+        <div class="i-social">
+          <a href="wkrótce.html"
+            ><img class="img-social" src="images/ig.png" alt=""
+          /></a>
+        </div>
+        <div class="i-social">
+          <a href="wkrótce.html"
+            ><img class="img-social" src="images/yt.png" alt=""
+          /></a>
+        </div>
+        <div class="i-social">
+          <a href="wkrótce.html"
+            ><img class="img-social" src="images/dc.png" alt=""
+          /></a>
+        </div>
+      </div>
+      <div class="czasidata">
+        <p id="czas"></p>
+        <p id="data"></p>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
