@@ -37,10 +37,15 @@ function addUser() {
         console.log('Status: ', response.status);
         return response.json();
     })
+    // ...
     .then(data => {
         console.log('User added successfully:', data);
+        alert('Konto utworzone'); // Dodaj komunikat
+        window.location.href = 'logowanie.html'; // Przekieruj do strony logowanie.html
     })
+    // ...
     .catch(error => {
         console.error('Error:', error);
     });
+
 }
