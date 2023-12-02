@@ -478,8 +478,8 @@ width: 7%;
 }
 .panel-opis
 {
-  width: 95%;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   resize: none;
 }
 .panel-wyjazdu
@@ -487,6 +487,16 @@ width: 7%;
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.textarea-container {
+  position: relative;
+  height: 200px;
+  width: 300px;
+}
+#wordCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 /*--------------------------------Kontakt--------------------------------------------------------*/
 .kontakt
@@ -693,4 +703,13 @@ width: 7%;
 
 #target {
   width: 345px;
+}
+#data-startu-wyjazdu,#czas-startu-wyjazdu,#data-konca-wyjazdu,#czas-konca-wyjazdu
+{
+  text-align: center;
+  width: 120px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid black;
+  margin: 5px;
 }

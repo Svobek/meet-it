@@ -303,6 +303,8 @@ h5
     }
 
 
+
+
     .bg__dot:nth-child(1) {
         animation: move1 15s linear infinite;
         height: 50vh;

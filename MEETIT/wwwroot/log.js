@@ -47,6 +47,8 @@ fetch(apiUrl, {
         console.error('Login failed. Incorrect username or password. Try again.');
         // Display an error message on the page
         document.getElementById('loginErrorMessage').textContent = 'Incorrect username or password. Try again.';
+        // Add an alert
+        alert('Login failed. Incorrect username or password. Try again.');
     }
 })
 .catch(error => {
