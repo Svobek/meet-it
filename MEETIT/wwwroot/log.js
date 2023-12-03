@@ -5,19 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loginUser() {
-    var apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
+    let apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
+    let loginValue = document.getElementById('loginUser').value;
+    let passwordValue = document.getElementById('loginPassword').value;
 
-    // Get values from input fields
-    var loginValue = document.getElementById('loginUser').value;
-    var passwordValue = document.getElementById('loginPassword').value;
-
-    // Validate input values (you may want to add more validation)
     if (!loginValue || !passwordValue) {
         console.error('Login and password are required');
         return;
     }
 
-    var user = {
+    let user = {
         login: loginValue,
         psswd: passwordValue
     };
@@ -33,21 +30,21 @@ function loginUser() {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        console.log('Status: ', response.status);
-        return response.json();
+        console.log("321");
+        return response.text();
     })
     .then(data => {
-        if (data.success) {
-            console.log('Login successful:', data);
-            // Redirect to the desired page after successful login
-            window.location.href = 'index.html';
+        console.log(data);
+        console.log("123");
+        if (data === "Succesfull Login") {
+            alert("Zalogowano pomyślnie!");
+            window.location.href = '/index.html';
         } else {
-            console.error('Login failed. Incorrect username or password. Try again.');
-            // Display an error message on the page
             document.getElementById('loginErrorMessage').textContent = 'Incorrect username or password. Try again.';
+            alert('Login failed. Incorrect username or password. Try again.');
         }
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Fetch error:', error);
     });
 }

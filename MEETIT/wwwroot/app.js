@@ -1,3 +1,28 @@
+// skrypt sprawdzania zalogowania
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const zapWyj = document.getElementById('ZapWyj');
+  const twWyj = document.getElementById('TwWyj');
+
+  // Sprawdź, czy użytkownik jest zalogowany
+  // Zastąp to odpowiednią logiką sprawdzającą stan logowania
+  const isLoggedIn = false;
+
+  if (!isLoggedIn) {
+      zapWyj.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.location.href = 'logowanie.html';
+      });
+
+      twWyj.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.location.href = 'logowanie.html';
+      });
+  }
+});
+
+
+// skrypt godziny
 function aktualizujCzas() {
     // Utwórz nowy obiekt Date
     let teraz = new Date();
@@ -48,40 +73,20 @@ setInterval(aktualizujCzas, 1000);
      } 
  }
 
-
- //uzupelnianie danych z mapy
-
- // Funkcja obsługująca zmiany miejsc
- function setupPlaceChangedListener(map, searchBox) {
-    let markers = [];
   
-    searchBox.addListener("places_changed", () => {
-      const places = searchBox.getPlaces();
-  
-      console.log(places); // Sprawdź, czy dane są prawidłowo pobierane
-  
-      if (places.length == 0) {
-        return;
+  // funkcja limitu slow 
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const textarea = document.querySelector('.panel-opis');
+    const wordCount = document.querySelector('#wordCount');
+    textarea.addEventListener('input', (event) => {
+      event.target.value = event.target.value.substring(0, 150);
+      const letters = event.target.value.length;
+      wordCount.textContent = `${letters}/150`;
+      if (letters >= 150) {
+        wordCount.style.color = 'red';
+      } else {
+        wordCount.style.color = 'black';
       }
-  
-      // ... reszta kodu
     });
-  }
-  
-  function updateLocationFields(place) {
-    // Pobierz referencje do pól wejściowych
-    const countryInput = document.querySelector(".box2 .input-panel:nth-child(1)");
-    const cityInput = document.getElementById("location-input");
-    const provinceInput = document.querySelector(".box2 .input-panel:nth-child(3)");
-    const addressInput = document.querySelector(".box2 .input-panel:nth-child(4)");
-  
-    console.log(place); // Sprawdź, czy dane są prawidłowo przekazywane
-  
-    // Zaktualizuj wartości pól wejściowych
-    countryInput.value = getComponentValue(place, "country");
-    cityInput.value = getComponentValue(place, "locality");
-    provinceInput.value = getComponentValue(place, "administrative_area_level_1");
-    addressInput.value = getComponentValue(place, "route");
-  }
-  
-  
+  });
+
