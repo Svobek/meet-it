@@ -70,7 +70,7 @@ namespace meetit.Controllers
             }
             if (BCrypt.Net.BCrypt.Verify(users.psswd, user.psswd))
             {
-                return Ok();
+                return Ok("Succesfull Login");
             }
             else
             {
