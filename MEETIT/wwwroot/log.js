@@ -30,11 +30,12 @@ function loginUser() {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
+        return response.text();
     })
     .then(data => {
-        if (data.success) {
-            window.location.href = 'index.html';
+        if (data === "Succesfull Login") {
+            alert("Zalogowano pomyślnie!");
+            window.location.href = '/index.html';
         } else {
             document.getElementById('loginErrorMessage').textContent = 'Incorrect username or password. Try again.';
             alert('Login failed. Incorrect username or password. Try again.');
