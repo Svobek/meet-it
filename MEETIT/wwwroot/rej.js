@@ -45,7 +45,7 @@ function addUser() {
         },
         body: JSON.stringify(user)
     })
-    .then(response => {
+/*    .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -56,7 +56,7 @@ function addUser() {
         console.log('User added successfully:', data);
         alert('Konto utworzone');
         window.location.href = 'logowanie.html';
-    })
+    }) */
     .catch(error => {
         console.error('Error:', error);
     });
