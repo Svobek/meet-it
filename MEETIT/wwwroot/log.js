@@ -1,4 +1,4 @@
-/*document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginButton').addEventListener('click', function () {
         loginUser();
     });
@@ -31,6 +31,7 @@ function loginUser() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         console.log("321");
+        console.log(response);
         return response.text();
     })
     .then(data => {
@@ -47,41 +48,5 @@ function loginUser() {
     .catch(error => {
         console.error('Fetch error:', error);
     });
-}*/
-async function loginUser() {
-    const url = 'https://meeetit.azurewebsites.net/User/Login/'; // Zastąp 'adres_twojego_endpointu' odpowiednim adresem
-    let login = document.getElementById('loginUser').value;
-    let password = document.getElementById('loginPassword').value;
-    const requestBody = {
-        login: login,
-        psswd: password
-    };
-    console.log(requestBody);
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',    
-            body: JSON.stringify(requestBody)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log(result);
-        if (response.status === 200) {
-            console.log('Successful Login:', result);
-        } else {
-            console.error('Login Failed:', result);
-        }
-    } catch (error) {
-        console.error('Error:', error.message);
-    }
 }
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('loginButton').addEventListener('click', function () {
-        loginUser();
-    });
-});
 
