@@ -83,7 +83,7 @@ async function loginUser(login, password) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginButton').addEventListener('click', function () {
-        loginUser();
+        loginUser(login, password);
     });
 });
 let login = document.getElementById('loginUser').value;
