@@ -61,3 +61,44 @@ function addUser() {
         console.error('Error:', error);
     });
 }
+
+
+//skrypt informujacy od ilosci znakow w polu tekstowym
+document.addEventListener('DOMContentLoaded', function () {
+    // Ukryj div 'password-info' po załadowaniu strony
+    let passwordInfo = document.getElementById('password-info');
+    passwordInfo.style.display = 'none';
+
+    document.getElementById('loginButton').addEventListener('click', function () {
+        loginUser();
+    });
+});
+  // Wybierz elementy input
+  let passwordInput = document.getElementById('password');
+  let returnPasswordInput = document.getElementById('return-password');
+
+  // Wybierz div do wyświetlania informacji
+  let passwordInfo = document.getElementById('password-info');
+
+  // Ustaw komunikat
+  let message = "Hasło powinno zawierać:\n - min. 6 znaków \n- min. jedna duża litera\n- min. jedna cyfra";
+
+  // Dodaj zdarzenie 'focus' do elementów input
+  passwordInput.addEventListener('focus', function() {
+    passwordInfo.style.display = 'block';
+    passwordInfo.innerText = message;
+  });
+
+  returnPasswordInput.addEventListener('focus', function() {
+    passwordInfo.style.display = 'block';
+    passwordInfo.innerText = message;
+  });
+
+  // Dodaj zdarzenie 'blur' do elementów input
+  passwordInput.addEventListener('blur', function() {
+    passwordInfo.style.display = 'none';
+  });
+
+  returnPasswordInput.addEventListener('blur', function() {
+    passwordInfo.style.display = 'none';
+  });
