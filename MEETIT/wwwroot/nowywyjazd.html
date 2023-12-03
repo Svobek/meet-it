@@ -17,10 +17,10 @@
     <div class="header">
       <a class="meetit-nw" href="index.html">MEET-IT</a>
       <div class="menu-nw">
-        <a class="link" href="nowywyjazd.html">
+        <a id="ZapWyj" class="link" href="nowywyjazd.html">
           <div class="strony">Zaplanuj wyjazd</div>
         </a>
-        <a class="link" href="wyjazdy.html">
+        <a id="TwWyj" class="link" href="wyjazdy.html">
           <div class="strony">Twoje wyjazdy</div>
         </a>
         <a class="link" href="kontakt.html">
@@ -32,7 +32,7 @@
       </div>
       <div class="logout">
         <button class="wyloguj">
-          <a class="out" href="logowanie.html">Wyloguj</a>
+          <a class="out" href="logowanie.html">Zaloguj się</a>
         </button>
       </div>
     </div>
@@ -69,85 +69,66 @@
       </div>
       <div class="panel">
         <div class="panel-wyjazdu">
-          <div class="box2">
-            <input class="input-panel input-p" type="text" placeholder="Kraj" />
-            <input
-              id="location-input"
-              class="input-panel input-p"
-              type="text"
-              placeholder="Miasto"
-            />
-            <input
-              class="input-panel input-p"
-              type="text"
-              placeholder="Województwo"
-            />
-            <input
-              class="input-panel input-p"
-              type="text"
-              placeholder="Adres"
-            />
-          </div>
-          <div class="box3">
-            <input class="input-panel input-p" type="text" placeholder="Cel" />
-            <input
-              id="ilosc-osob"
-              class="input-panel input-osoby"
-              type="number"
-              placeholder="Ilość osób"
-            />
-            <input
-              id="osoby"
-              class="input-panel input-cena"
-              type="text"
-              placeholder="Osoby"
-            />
-          </div>
-          <div class="box4">
-            <input
-              id="budzet"
-              class="input-panel input-budzet"
-              type="number"
-              placeholder="Budżet"
-            />
-            <input
-              id="koszty"
-              class="input-panel input-koszt"
-              type="number"
-              placeholder="Koszt Wyjazdu"
-            />
-            <input
-              id="koszt-osoba"
-              class="input-panel input-kosztnaosobe"
-              type="text"
-              placeholder="Koszt na Osobe"
-              readonly
-            />
-          </div>
+          <input class="input-panel input-p" type="text" placeholder="Kraj" />
+          <input
+            id="location-input"
+            class="input-panel input-p"
+            type="text"
+            placeholder="Miasto"
+          />
+
+          <input class="input-panel input-p" type="text" placeholder="Adres" />
+
+          <input class="input-panel input-p" type="text" placeholder="Cel" />
+          <input
+            id="ilosc-osob"
+            class="input-panel input-osoby"
+            type="number"
+            placeholder="Ilość osób"
+          />
+          <input
+            id="osoby"
+            class="input-panel input-cena"
+            type="text"
+            placeholder="Osoby"
+          />
+
+          <input
+            id="budzet"
+            class="input-panel input-budzet"
+            type="number"
+            placeholder="Budżet"
+          />
+          <input
+            id="koszty"
+            class="input-panel input-koszt"
+            type="number"
+            placeholder="Koszt Wyjazdu"
+          />
+          <input
+            id="koszt-osoba"
+            class="input-panel input-kosztnaosobe"
+            type="text"
+            placeholder="Koszt na Osobe"
+            readonly
+          />
 
           <div class="oddo">
             <div class="poczatek">
               <label for="" style="color: white">Start Wyjazdu</label>
-              <input
-                id="data-start-wyjazdu"
-                type="date"
-                id="start"
-                name="trip-start"
-              />
-              <input id="czas-start-wyjazdu" type="time" name="" id="" /><br />
+              <input id="data-startu-wyjazdu" type="date" name="trip-start" />
+              <input id="czas-startu-wyjazdu" type="time" name="" /><br />
             </div>
             <div class="zakonczenie">
               <label for="" style="color: white">Koniec Wyjazdu</label>
-              <input
-                id="data-kaniec-wyjazdu"
-                type="date"
-                id="end"
-                name="trip-end"
-              />
-              <input id="czas-start-wyjazdu" type="time" name="" id="" />
+              <input id="data-konca-wyjazdu" type="date" name="trip-end" />
+              <input id="czas-konca-wyjazdu" type="time" name="" />
             </div>
           </div>
-          <textarea class="panel-opis" placeholder="opis"></textarea>
+          <div class="textarea-container">
+            <textarea class="panel-opis" placeholder="opis"></textarea>
+            <div id="wordCount">0/150</div>
+          </div>
         </div>
         <button id="dojazd">dojazd</button>
         <div class="zapisywanie">
