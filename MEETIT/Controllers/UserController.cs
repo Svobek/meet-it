@@ -18,7 +18,7 @@ namespace meetit.Controllers
         }
 
 
-        [EnableCors("AllowAllOrigins")]
+        
         public IActionResult AddUser([FromBody] Users users)
         {
             
@@ -62,7 +62,7 @@ namespace meetit.Controllers
         }
 
         //write method to login user
-        [EnableCors("AllowAllOrigins")]
+        
         public IActionResult Login([FromBody] Users users)
         {
             var user = _context.Users.FirstOrDefault(u => u.login == users.login);
@@ -80,7 +80,7 @@ namespace meetit.Controllers
             }
         }
         //write method to print all users on website
-        [EnableCors("AllowAllOrigins")]
+       
         public IActionResult GetAllUsers()
         {
             var users = _context.Users.ToList();
