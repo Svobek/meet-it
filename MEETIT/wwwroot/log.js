@@ -30,9 +30,12 @@ function loginUser() {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        console.log("321");
         return response.text();
     })
     .then(data => {
+        console.log(data);
+        console.log("123");
         if (data === "Succesfull Login") {
             alert("Zalogowano pomyślnie!");
             window.location.href = '/index.html';
