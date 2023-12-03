@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace meetit.Controllers
@@ -16,8 +17,8 @@ namespace meetit.Controllers
             _context = context;
         }
 
-        
 
+        [EnableCors("AllowAllOrigins")]
         public IActionResult AddUser([FromBody] Users users)
         {
             
@@ -61,6 +62,7 @@ namespace meetit.Controllers
         }
 
         //write method to login user
+        [EnableCors("AllowAllOrigins")]
         public IActionResult Login([FromBody] Users users)
         {
             var user = _context.Users.FirstOrDefault(u => u.login == users.login);
@@ -70,7 +72,7 @@ namespace meetit.Controllers
             }
             if (BCrypt.Net.BCrypt.Verify(users.psswd, user.psswd))
             {
-                return Ok();
+                return Ok("Succesfull Login");
             }
             else
             {
@@ -78,12 +80,17 @@ namespace meetit.Controllers
             }
         }
         //write method to print all users on website
+        [EnableCors("AllowAllOrigins")]
         public IActionResult GetAllUsers()
         {
             var users = _context.Users.ToList();
             return Ok(users);
         }
         
+
+       
+
+
 
 
        
