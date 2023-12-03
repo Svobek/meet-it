@@ -60,10 +60,7 @@ async function loginUser() {
 
     try {
         const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            method: 'POST',    
             body: JSON.stringify(requestBody)
         });
 
@@ -72,7 +69,7 @@ async function loginUser() {
         }
 
         const result = await response.json();
-
+        console.log(result);
         if (response.status === 200) {
             console.log('Successful Login:', result);
         } else {
