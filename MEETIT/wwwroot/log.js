@@ -48,9 +48,10 @@ function loginUser() {
         console.error('Fetch error:', error);
     });
 }*/
-async function loginUser(login, password) {
+async function loginUser() {
     const url = 'https://meeetit.azurewebsites.net/User/Login/'; // Zastąp 'adres_twojego_endpointu' odpowiednim adresem
-
+    let login = document.getElementById('loginUser').value;
+    let password = document.getElementById('loginPassword').value;
     const requestBody = {
         login: login,
         psswd: password
@@ -83,8 +84,7 @@ async function loginUser(login, password) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginButton').addEventListener('click', function () {
-        loginUser(login, password);
+        loginUser();
     });
 });
-let login = document.getElementById('loginUser').value;
-let password = document.getElementById('loginPassword').value;
+
