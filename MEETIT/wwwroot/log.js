@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function loginUser() {
-    let apiUrl = 'https://meeeetit.azurewebsites.net/User/Login/';
+    let apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
     let loginValue = document.getElementById('loginUser').value;
     let passwordValue = document.getElementById('loginPassword').value;
 
