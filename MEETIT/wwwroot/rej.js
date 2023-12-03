@@ -51,12 +51,12 @@ function addUser() {
         }
         console.log('Status: ', response.status);
         return response.json();
-    })
-    .then(data => {
+    })*/
+    .then(response => {
         console.log('User added successfully:', data);
         alert('Konto utworzone');
         window.location.href = 'logowanie.html';
-    }) */
+    }) 
     .catch(error => {
         console.error('Error:', error);
     });
