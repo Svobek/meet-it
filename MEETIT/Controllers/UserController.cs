@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace meetit.Controllers
 {
-    [ApiController]
+    
     public class UserController : Controller
     {
         private readonly AppDbContext _context;
