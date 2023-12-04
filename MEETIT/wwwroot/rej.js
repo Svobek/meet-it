@@ -18,6 +18,7 @@ function validatePassword(password) {
     return true;
 }
 
+
 function addUser() {
     var apiUrl = 'https://meeetit.azurewebsites.net/User/AddUser/';
 
