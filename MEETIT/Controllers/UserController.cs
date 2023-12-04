@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace meetit.Controllers
 {
+    [ApiController]
     public class UserController : Controller
     {
         private readonly AppDbContext _context;
@@ -17,8 +18,8 @@ namespace meetit.Controllers
             _context = context;
         }
 
-
         
+        [HttpPost]
         public IActionResult AddUser([FromBody] Users users)
         {
             
@@ -62,7 +63,7 @@ namespace meetit.Controllers
         }
 
         //write method to login user
-
+        [HttpPost]
         public IActionResult Login([FromBody] Users users)
         {
             var user = _context.Users.FirstOrDefault(u => u.login == users.login);
@@ -87,6 +88,9 @@ namespace meetit.Controllers
             var users = _context.Users.ToList();
             return Ok(users);
         }
+
+        
+
         
 
        

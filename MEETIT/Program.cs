@@ -36,12 +36,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.UseRouting();
-app.UseCors(MyAllowSpecificOrigins);
+
 app.UseAuthorization();
 
 
