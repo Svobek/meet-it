@@ -15,7 +15,6 @@
     <None Include="wwwroot\favicon.ico" />
     <None Include="wwwroot\index.html" />
     <None Include="wwwroot\kontakt.html" />
-    <None Include="wwwroot\map-pkt.js" />
     <None Include="wwwroot\map.js" />
     <None Include="wwwroot\nowywyjazd.html" />
     <None Include="wwwroot\README.md" />

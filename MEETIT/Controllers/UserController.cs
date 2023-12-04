@@ -62,10 +62,11 @@ namespace meetit.Controllers
         }
 
         //write method to login user
-        
+
         public IActionResult Login([FromBody] Users users)
         {
             var user = _context.Users.FirstOrDefault(u => u.login == users.login);
+           
             if (user == null)
             {
                 return BadRequest("Invalid login or password");
