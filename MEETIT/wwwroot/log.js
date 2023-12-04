@@ -51,6 +51,7 @@ function loginUser() {
 }*/
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('loginButton').addEventListener('click', function () {
+        event.preventDefault();
         loginUser();
     });
 });
