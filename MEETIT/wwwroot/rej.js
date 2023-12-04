@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addUser').addEventListener('click', function () {
+        event.preventDefault();
         addUser();
     });
 });
