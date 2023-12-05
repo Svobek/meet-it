@@ -12,7 +12,7 @@ async function loginUser() {
         let passwordValue = document.getElementById('loginPassword').value;
 
         if (!loginValue || !passwordValue) {
-            console.error('Login and password are required');
+            document.getElementById('loginErrorMessage').textContent = 'Incorrect username or password. Try again.';
             return;
         }
 
