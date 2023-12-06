@@ -35,14 +35,11 @@ async function loginUser() {
             }
         }
 
-        console.log("321");
-        console.log(response);
+       
 
-        
-        console.log(data);
-        console.log("123");
-
-        if (data === "Succesfull Login") {
+        if (response.status === 200) {
+            const token = data;
+            sessionStorage.setItem('token', token);
             alert("Zalogowano pomyślnie!");
             window.location.href = '/index.html';
         } 

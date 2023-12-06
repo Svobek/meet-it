@@ -1,6 +1,6 @@
 // skrypt sprawdzania zalogowania
 
-document.addEventListener('DOMContentLoaded', (event) => {
+/*document.addEventListener('DOMContentLoaded', (event) => {
   const zapWyj = document.getElementById('ZapWyj');
   const twWyj = document.getElementById('TwWyj');
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           window.location.href = 'logowanie.html';
       });
   }
-});
+});*/
 
 
 // skrypt godziny
@@ -90,3 +90,38 @@ setInterval(aktualizujCzas, 1000);
     });
   });
 
+
+
+//add event listener to add new trip button
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('ZapWyj').addEventListener('click', function () {
+        event.preventDefault();
+        checkIfLoggedIn();
+    });
+});
+
+
+
+    //write method to check if user is logged in
+    async function checkIfLoggedIn() {
+        try {
+            const token = sessionStorage.getItem('token');
+            let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
+
+            let response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/text'
+                },
+            });
+            let data = await response.text();
+            if (!response.ok) {
+                    window.location.href = '/logowanie.html';                
+            }
+            if (response.status === 200) {
+                window.location.href = '/nowywyjazd.html';
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }

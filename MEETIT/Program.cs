@@ -1,5 +1,8 @@
 using meetit.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +22,23 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("00112233445566778899AABBCCDDEEFF"))
+    };
+});
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -41,7 +60,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 
@@ -76,6 +95,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "GetAllUsers",
     pattern: "{controller=User}/{action=GetAllUsers}/");
+
+app.MapControllerRoute(
+    name: "Token",
+    pattern: "{controller=User}/{action=CheckToken}/{token?}");
 
 
 

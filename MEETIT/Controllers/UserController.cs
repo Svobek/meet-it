@@ -4,6 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.VisualBasic;
+using System.CodeDom.Compiler;
 
 
 namespace meetit.Controllers
@@ -74,7 +81,10 @@ namespace meetit.Controllers
             }
             if (BCrypt.Net.BCrypt.Verify(users.psswd, user.psswd))
             {
-                return Ok("Succesfull Login");
+                var Token = GenerateToken(user.login);
+                return Ok(Token);
+                
+                
             }
             else
             {
@@ -92,12 +102,80 @@ namespace meetit.Controllers
         
 
         
+        private string GenerateToken(string username)
+        {
+            
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("00112233445566778899AABBCCDDEEFF"); // Klucz używany do podpisywania tokena
 
-       
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                new Claim(ClaimTypes.Name, username),
+                // Dodaj inne roszczenia (claims) w zależności od potrzeb
+            }),
+                Expires = DateTime.UtcNow.AddHours(1), // Czas ważności tokena
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        //write method to validate token
+        private bool ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("00112233445566778899AABBCCDDEEFF"); // Klucz używany do weryfikacji tokena
+
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(key), // Klucz używany do podpisywania tokena
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true
+                }, out SecurityToken validatedToken);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        //write endpoint to check if token is valid
+        [HttpGet]
+        public IActionResult CheckToken(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Token is empty");
+            }
+            if (ValidateToken(token))
+            {
+                return Ok("Token is valid");
+            }
+            else
+            {
+                return BadRequest("Token is invalid");
+            }
+        }
 
 
 
 
-       
+
+
+
+
+
+
+
+
     }
 }
