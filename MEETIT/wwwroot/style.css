@@ -122,15 +122,15 @@ h2 {
   background: none;
 }
 .link {
-  text-decoration: none;
-  color: white;
-  background: none;
-  position: relative;
-  overflow: hidden;
-  width: 125px;
-  border: none;
-  margin: 0;
-  padding: 0;
+    text-decoration: none;
+    color: white;
+    background: none;
+    position: relative;
+    overflow: hidden;
+    width: 125px;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 .link::after {
   content: '';
