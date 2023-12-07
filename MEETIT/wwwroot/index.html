@@ -16,8 +16,10 @@
     </div>
     <div class="header">
       <div class="menu-nw" style="margin-left: 300px">
-        <button id="ZapWyj" class="link" onclick="checkIfLoggedIn()">Zaplanuj wyjazd</button>
-        <a id="TwWyj" class="link" href="wyjazdy.html">
+        <a id="ZapWyj" class="link" onclick="checkIfLoggedInNW()">
+            <div class="strony">Zaplanuj wyjazd</div>
+        </a>
+        <a id="TwWyj" class="link" onclick="checkIfLoggedInTW()">
           <div class="strony">Twoje wyjazdy</div>
         </a>
         <a class="link" href="team.html">
@@ -28,9 +30,15 @@
         </a>
       </div>
       <div class="logout">
-        <button class="wyloguj">
-          <a class="out" href="logowanie.html">Zaloguj się</a>
-        </button>
+          <button id="zaloguj" class="wyloguj">
+              <a class="out" href="logowanie.html">Zaloguj się</a>
+          </button>
+          <button id="login" class="wyloguj">
+          </button>
+          <button id="wyloguj" class="wyloguj">
+              <a class="out" onclick="logout()">Wyloguj</a>
+          </button>
+
       </div>
     </div>
     <div class="container">
@@ -76,5 +84,43 @@
       </div>
     </div>
     <script src="app.js"></script>
+    <script>
+        var zaloguj = document.getElementById("zaloguj");
+        var wyloguj = document.getElementById("wyloguj");
+        var user = document.getElementById("login");
+        
+        async function onPageLoad() {
+            var login = sessionStorage.getItem("login");
+            
+            try {
+                const token = sessionStorage.getItem('token');
+                let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
+
+                let response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/text'
+                    },
+                });
+                let data = await response.text();
+                if (!response.ok) {
+                    user.style.display = "none";
+                    wyloguj.style.display = "none";
+                    zaloguj.style.display = "block";
+                }
+                if (response.status === 200) {
+                    user.style.display = "block";
+                    document.getElementById("login").innerHTML = login;
+                    wyloguj.style.display = "block";
+                    zaloguj.style.display = "none";
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+            
+        }
+        window.addEventListener('load', onPageLoad);
+
+    </script>
   </body>
 </html>

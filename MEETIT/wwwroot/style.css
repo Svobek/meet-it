@@ -156,6 +156,14 @@ h2 {
   width: 100px;
   height: 35px;
 }
+.wyloguj2 {
+    background: yellow;
+    color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 100px;
+    height: 35px;
+}
 .czasidata {
   padding: 0;
   margin: 10px 10px 0 0;
@@ -713,3 +721,5 @@ width: 7%;
   border: 1px solid black;
   margin: 5px;
 }
+
+

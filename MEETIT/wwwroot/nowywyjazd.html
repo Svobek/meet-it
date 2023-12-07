@@ -17,10 +17,10 @@
     <div class="header">
       <a class="meetit-nw" href="index.html">MEET-IT</a>
       <div class="menu-nw">
-        <a id="ZapWyj" class="link" href="nowywyjazd.html">
+        <a id="ZapWyj" class="link" onclick="checkIfLoggedInNW()">
           <div class="strony">Zaplanuj wyjazd</div>
         </a>
-        <a id="TwWyj" class="link" href="wyjazdy.html">
+        <a id="TwWyj" class="link" onclick="checkIfLoggedInTW()">
           <div class="strony">Twoje wyjazdy</div>
         </a>
         <a class="link" href="kontakt.html">
@@ -31,9 +31,11 @@
         </a>
       </div>
       <div class="logout">
-        <button class="wyloguj">
-          <a class="out" href="logowanie.html">Zaloguj się</a>
-        </button>
+          <button id="login" class="wyloguj">
+          </button>
+          <button class="wyloguj">
+              <a class="out" onclick="logout()">Wyloguj</a>
+          </button>
       </div>
     </div>
     <div class="content">
@@ -181,5 +183,15 @@
     ></script>
     <script src="app.js"></script>
     <script src="maps.js"></script>
+    <script>
+        
+        function onPageLoad() {
+            var login = sessionStorage.getItem("login");
+            var user = document.getElementById("login");
+            user.style.display = "block";
+            document.getElementById("login").innerHTML = login;
+        }
+        window.addEventListener('load', onPageLoad);
+    </script>
   </body>
 </html>

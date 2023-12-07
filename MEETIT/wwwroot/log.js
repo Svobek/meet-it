@@ -40,6 +40,7 @@ async function loginUser() {
         if (response.status === 200) {
             const token = data;
             sessionStorage.setItem('token', token);
+            sessionStorage.setItem('login', loginValue);
             alert("Zalogowano pomyślnie!");
             window.location.href = '/index.html';
         } 

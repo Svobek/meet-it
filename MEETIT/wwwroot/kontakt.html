@@ -7,97 +7,134 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="header">
-      <a class="meetit-nw" href="index.html">MEET-IT</a>
-      <div class="menu-nw">
-        <a id="ZapWyj" class="link" href="nowywyjazd.html">
-          <div class="strony">Zaplanuj wyjazd</div>
-        </a>
-        <a id="TwWyj" class="link" href="wyjazdy.html">
-          <div class="strony">Twoje wyjazdy</div>
-        </a>
-        <a class="link" href="kontakt.html">
-          <div class="strony">Kontakt</div>
-        </a>
-        <a class="link" href="team.html">
-          <div class="strony">Nasz Team</div>
-        </a>
+      <div class="header">
+          <a class="meetit-nw" href="index.html">MEET-IT</a>
+          <div class="menu-nw">
+              <a id="ZapWyj" class="link" onclick="checkIfLoggedInNW()">
+                  <div class="strony">Zaplanuj wyjazd</div>
+              </a>
+              <a id="TwWyj" class="link" onclick="checkIfLoggedInTW()">
+                  <div class="strony">Twoje wyjazdy</div>
+              </a>
+              <a class="link" href="kontakt.html">
+                  <div class="strony">Kontakt</div>
+              </a>
+              <a class="link" href="team.html">
+                  <div class="strony">Nasz Team</div>
+              </a>
+          </div>
+          <div class="logout">
+              <button id="zaloguj" class="wyloguj">
+                  <a class="out" href="logowanie.html">Zaloguj się</a>
+              </button>
+              <button id="login" class="wyloguj">
+              </button>
+              <button id="wyloguj" class="wyloguj">
+                  <a class="out" onclick="logout()">Wyloguj</a>
+              </button>
+          </div>
       </div>
-      <div class="logout">
-        <button class="wyloguj">
-          <a class="out" href="logowanie.html">Zaloguj się</a>
-        </button>
+      <div class="container">
+          <div class="kontakt">
+              <div class="email">
+                  Email:<input class="main-input"
+                               type="email"
+                               placeholder=" Twoj Email" />
+              </div>
+              <div class="temat">
+                  Temat:<input class="main-input"
+                               type="text"
+                               placeholder=" Temat Wiadomości" />
+              </div>
+              <div class="tresc">
+                  <textarea class="tresc-wiadomosci"
+                            placeholder="Terść Wiadomości"></textarea>
+              </div>
+              <form action="/twoj_serwer" method="post" enctype="multipart/form-data">
+                  <input class="wyslij bw" type="submit" value="Wyślij" />
+                  <label for="file-upload">Wybierz plik:</label>
+                  <input type="file" id="file-upload" name="file-upload" />
+              </form>
+          </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="kontakt">
-        <div class="email">
-          Email:<input
-            class="main-input"
-            type="email"
-            placeholder=" Twoj Email"
-          />
-        </div>
-        <div class="temat">
-          Temat:<input
-            class="main-input"
-            type="text"
-            placeholder=" Temat Wiadomości"
-          />
-        </div>
-        <div class="tresc">
-          <textarea
-            class="tresc-wiadomosci"
-            placeholder="Terść Wiadomości"
-          ></textarea>
-        </div>
-        <form action="/twoj_serwer" method="post" enctype="multipart/form-data">
-          <input class="wyslij bw" type="submit" value="Wyślij" />
-          <label for="file-upload">Wybierz plik:</label>
-          <input type="file" id="file-upload" name="file-upload" />
-        </form>
+      <div class="footer">
+          <div class="social">
+              <p class="nasze-sociale">Nasze Social Media:</p>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/f.png" alt="" />
+                  </a>
+              </div>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/x.png" alt="" />
+                  </a>
+              </div>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/ig.png" alt="" />
+                  </a>
+              </div>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/yt.png" alt="" />
+                  </a>
+              </div>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/dc.png" alt="" />
+                  </a>
+              </div>
+              <div class="i-social">
+                  <a href="wkrótce.html">
+                      <img class="img-social" src="images/tt.png" alt="" />
+                  </a>
+              </div>
+          </div>
+          <div class="czasidata">
+              <p id="czas"></p>
+              <p id="data"></p>
+          </div>
       </div>
-    </div>
-    <div class="footer">
-      <div class="social">
-        <p class="nasze-sociale">Nasze Social Media:</p>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/f.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/x.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/ig.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/yt.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/dc.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/tt.png" alt=""
-          /></a>
-        </div>
-      </div>
-      <div class="czasidata">
-        <p id="czas"></p>
-        <p id="data"></p>
-      </div>
-    </div>
-    <script src="app.js"></script>
-    <script src="map.js"></script>
+      <script src="app.js"></script>
+      <script src="map.js"></script>
+      <script>
+          
+
+          async function onPageLoad() {
+              var login = sessionStorage.getItem("login");
+              var zaloguj = document.getElementById("zaloguj");
+              var wyloguj = document.getElementById("wyloguj");
+              var user = document.getElementById("login");
+              try {
+                  const token = sessionStorage.getItem('token');
+                  let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
+
+                  let response = await fetch(apiUrl, {
+                      method: 'GET',
+                      headers: {
+                          'Content-Type': 'application/text'
+                      },
+                  });
+                  let data = await response.text();
+                  if (!response.ok) {
+                      user.style.display = "none";
+                      wyloguj.style.display = "none";
+                      zaloguj.style.display = "block";
+                  }
+                  if (response.status === 200) {
+                      user.style.display = "block";
+                      document.getElementById("login").innerHTML = login;
+                      wyloguj.style.display = "block";
+                      zaloguj.style.display = "none";
+                  }
+              } catch (error) {
+                  console.error('Fetch error:', error);
+              }
+
+          }
+          window.addEventListener('load', onPageLoad);
+
+      </script>
   </body>
 </html>

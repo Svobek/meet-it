@@ -100,6 +100,15 @@ app.MapControllerRoute(
     name: "Token",
     pattern: "{controller=User}/{action=CheckToken}/{token?}");
 
+//write code to redirect to index.hmtl//write code to redirect to index.hmtl when someone enters url with another path
+app.MapGet("/", () => Results.Redirect("/index.html"));
 
+app.MapGet("/User/AddUser", () => Results.Redirect("/index.html"));
+app.MapGet("/User/Login", () => Results.Redirect("/index.html"));
+app.MapGet("/index.html", () => Results.Redirect("/index.html"));
+app.MapGet("/css", () => Results.Redirect("/index.html"));
+app.MapGet("/js", () => Results.Redirect("/index.html"));
+app.MapGet("/img", () => Results.Redirect("/index.html"));
+app.MapGet("/favicon.ico", () => Results.Redirect("/index.html")); 
 
- app.Run();
+app.Run();
