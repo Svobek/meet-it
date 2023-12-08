@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formularz Logowania</title>
     <link rel="stylesheet" href="style-log.css" />
-    
+
     <link rel="icon" href="/images/ico.png" type="image/x-icon" />
   </head>
   <body>
@@ -21,21 +21,21 @@
     </div>
 
     <form>
-
       <h1><i>MEET-IT</i></h1>
+      <div id="login-info"><p id="loginErrorMessage"></p></div>
+
       <div class="form_input-container">
         <input
-        
           class="main-input"
           id="loginUser"
           aria-label="User"
           type="text"
           placeholder=" "
         />
-        
+
         <label class="dane" for="loginUser">Login</label>
-    </div>
-    <div class="form_input-container">
+      </div>
+      <div class="form_input-container">
         <input
           class="main-input"
           id="loginPassword"
@@ -44,7 +44,7 @@
           placeholder=" "
         />
         <label class="dane" for="loginPassword">Hasło</label>
-    </div>
+      </div>
       <div class="check-zap">
         <div class="check">
           <input type="checkbox" id="remember" />
@@ -57,7 +57,7 @@
         </div>
       </div>
       <button id="loginButton" class="b-log">Zaloguj</button>
-      <p id="loginErrorMessage" style="color: red;"></p>
+
       <div class="spacer">
         <div class="form_spacer" aria-hidden="true"></div>
         <h4>Zaloguj się za pomocą</h4>

@@ -31,15 +31,24 @@ function aktualizujCzas() {
     teraz.setHours(teraz.getHours() + teraz.getTimezoneOffset() / 60 + 1);
 
     // Wyświetl aktualną datę
-    document.getElementById("data").innerHTML = teraz.toLocaleDateString();
+    let dzien = teraz.getDate().toString().padStart(2, '0');
+    let miesiac = (teraz.getMonth() + 1).toString().padStart(2, '0'); // Miesiące są liczone od 0, więc dodajemy 1
+    let rok = teraz.getFullYear();
+    document.getElementById("data").innerHTML = `${dzien}-${miesiac}-${rok}`;
 
     // Wyświetl aktualną godzinę
-    document.getElementById("czas").innerHTML = teraz.toLocaleTimeString();
+    let godziny = teraz.getHours().toString().padStart(2, '0');
+    let minuty = teraz.getMinutes().toString().padStart(2, '0');
+    let sekundy = teraz.getSeconds().toString().padStart(2, '0');
+    document.getElementById("czas").innerHTML = `${godziny}:${minuty}:${sekundy}`;
 }
 
 // Wywołaj funkcję aktualizujCzas od razu, a następnie co sekundę
 aktualizujCzas();
 setInterval(aktualizujCzas, 1000);
+
+
+
 
 //liczenie kosztów
  // Pobierz elementy input
@@ -85,7 +94,7 @@ setInterval(aktualizujCzas, 1000);
       if (letters >= 150) {
         wordCount.style.color = 'red';
       } else {
-        wordCount.style.color = 'black';
+        wordCount.style.color = 'white';
       }
     });
   });
