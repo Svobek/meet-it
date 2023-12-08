@@ -27,8 +27,36 @@ namespace meetit.Controllers
 
             return Ok("Point added successfully");
         }
-        
-        
 
+        //make endpoint to get all points by track id
+        public IActionResult GetPointsByTrackId(int id)
+        {
+            var points = _context.Points.Where(u => u.TrackID == id);
+            if (points == null)
+            {
+                return BadRequest("Invalid track id");
+            }
+
+            return Ok(points);
+        }
+        
+        //make endpoint to add point values 
+        public IActionResult AddPointValues([FromBody] PointValues pointvalue)
+        {
+            var lastId = _context.PointValues.OrderByDescending(u => u.idPointValues).FirstOrDefault().idPointValues;
+            pointvalue.idPointValues = lastId + 1;
+            if (pointvalue == null)
+            {
+                return BadRequest("Invalid point data");
+            }
+
+            _context.PointValues.Add(pointvalue);
+            _context.SaveChanges();
+
+            return Ok("Point added successfully");
+        }
+
+       
+        
     }
 }

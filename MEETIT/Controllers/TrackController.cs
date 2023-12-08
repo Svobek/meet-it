@@ -29,11 +29,16 @@ namespace meetit.Controllers
         }
        
 
-        // get track by id
-        public IActionResult GetTrackById(int id)
+        //get track id by name
+        public IActionResult GetTrackIdByName(string name)
         {
-            var track = _context.Track.FirstOrDefault(u => u.idTrack == id);
-            return Ok(track);
+            var track = _context.Track.FirstOrDefault(u => u.Name == name);
+            if (track == null)
+            {
+                return BadRequest("Invalid track name");
+            }
+
+            return Ok(track.idTrack);
         }
 
         
