@@ -98,10 +98,31 @@ function initAutocomplete() {
 window.initAutocomplete = initAutocomplete;
 
 
+//write function to load list on page load
+window.onload = function () {
+    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    if (markersArray == null) {
+        markersArray = [];
+    }
+    else {
+        var list = document.getElementById('list');
+        for (var i = 0; i < markersArray.length; i++) {
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(markersArray[i].nazwa));
+            list.appendChild(li);
+        }
+    }
+    
+}
+   
 
 
 //add event listener to add markers to session storage and list them on list
-document.getElementById('dojazd').addEventListener('click', function() {
+document.getElementById('dojazd').addEventListener('click', function () {
+ADDtoList();
+});
+
+function ADDtoList() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
     if (markersArray == null) {
         markersArray = [];
@@ -134,7 +155,7 @@ document.getElementById('dojazd').addEventListener('click', function() {
         console.log(markersArray);
         insertMarkerInfoToInputs();
     }
-});
+}
 
 
 //add function to insert marker innformation to inputs when clicked on list element
