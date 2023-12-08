@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="/images/ico.png" type="image/x-icon" />
   </head>
-  <body style="background: none;">
+  <body style="background: none">
     <div class="video-background">
       <video autoplay loop muted>
         <source src="images/w1.mp4" type="video/mp4" />
@@ -17,7 +17,7 @@
     <div class="header">
       <div class="menu-nw" style="margin-left: 300px">
         <a id="ZapWyj" class="link" onclick="checkIfLoggedInNW()">
-            <div class="strony">Zaplanuj wyjazd</div>
+          <div class="strony">Zaplanuj wyjazd</div>
         </a>
         <a id="TwWyj" class="link" onclick="checkIfLoggedInTW()">
           <div class="strony">Twoje wyjazdy</div>
@@ -30,15 +30,13 @@
         </a>
       </div>
       <div class="logout">
-          <button id="zaloguj" class="wyloguj">
-              <a class="out" href="logowanie.html">Zaloguj się</a>
-          </button>
-          <button id="login" class="wyloguj">
-          </button>
-          <button id="wyloguj" class="wyloguj">
-              <a class="out" onclick="logout()">Wyloguj</a>
-          </button>
-
+        <button id="loginButton" class="wyloguj">
+          <a class="out" href="logowanie.html">Zaloguj się</a>
+        </button>
+        <span id="username">Cześć, </span>
+        <button id="logoutButton" class="wyloguj">
+          <a class="out" onclick="logout()">Wyloguj</a>
+        </button>
       </div>
     </div>
     <div class="container">
@@ -49,78 +47,7 @@
         </a>
       </p>
     </div>
-    <div class="footer">
-      <div class="social">
-        <p class="nasze-sociale">Nasze Social Media :</p>
-        <div class="i-social">
-          <a href="wkrótce.html"
-            ><img class="img-social" src="images/f.png" alt=""
-          /></a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html">
-            <img class="img-social" src="images/x.png" alt="" />
-          </a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html">
-            <img class="img-social" src="images/ig.png" alt="" />
-          </a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html">
-            <img class="img-social" src="images/yt.png" alt="" />
-          </a>
-        </div>
-        <div class="i-social">
-          <a href="wkrótce.html">
-            <img class="img-social" src="images/dc.png" alt="" />
-          </a>
-        </div>
-      </div>
-      <div class="czasidata">
-        <p id="czas"></p>
-        <p id="data"></p>
-      </div>
-    </div>
     <script src="app.js"></script>
-    <script>
-        var zaloguj = document.getElementById("zaloguj");
-        var wyloguj = document.getElementById("wyloguj");
-        var user = document.getElementById("login");
-        
-        async function onPageLoad() {
-            var login = sessionStorage.getItem("login");
-            
-            try {
-                const token = sessionStorage.getItem('token');
-                let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
-
-                let response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/text'
-                    },
-                });
-                let data = await response.text();
-                if (!response.ok) {
-                    user.style.display = "none";
-                    wyloguj.style.display = "none";
-                    zaloguj.style.display = "block";
-                }
-                if (response.status === 200) {
-                    user.style.display = "block";
-                    document.getElementById("login").innerHTML = login;
-                    wyloguj.style.display = "block";
-                    zaloguj.style.display = "none";
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-            }
-            
-        }
-        window.addEventListener('load', onPageLoad);
-
-    </script>
+    <script src="user.js"></script>
   </body>
 </html>

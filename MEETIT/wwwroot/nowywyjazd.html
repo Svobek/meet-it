@@ -17,10 +17,10 @@
     <div class="header">
       <a class="meetit-nw" href="index.html">MEET-IT</a>
       <div class="menu-nw">
-        <a id="ZapWyj" class="link" onclick="checkIfLoggedInNW()">
+        <a id="ZapWyj" class="link" href="nowywyjazd.html">
           <div class="strony">Zaplanuj wyjazd</div>
         </a>
-        <a id="TwWyj" class="link" onclick="checkIfLoggedInTW()">
+        <a id="TwWyj" class="link" href="wyjazdy.html">
           <div class="strony">Twoje wyjazdy</div>
         </a>
         <a class="link" href="kontakt.html">
@@ -31,35 +31,17 @@
         </a>
       </div>
       <div class="logout">
-          <button id="login" class="wyloguj">
-          </button>
-          <button class="wyloguj">
-              <a class="out" onclick="logout()">Wyloguj</a>
-          </button>
+        <button id="loginButton" class="wyloguj">
+          <a class="out" href="logowanie.html">Zaloguj się</a>
+        </button>
+        <span id="username">Cześć, </span>
+        <button id="logoutButton" class="wyloguj">
+          <a class="out" onclick="logout()">Wyloguj</a>
+        </button>
       </div>
     </div>
     <div class="content">
       <div class="mapa">
-        <!--
-        <div class="wyszukaj">
-          <input
-            class="search"
-            type="text"
-            placeholder=""
-            id="location-input"
-          />
-          <button class="button-cta">
-            <img
-              title="szukaj"
-              class="i-search"
-              src="images/search-black.png"
-              alt=""
-            />
-          </button>
-        </div>-->
-        <!--
-          <div class="map" id="gmp-map"></div>
-        -->
         <input
           id="pac-input"
           class="controls"
@@ -70,17 +52,53 @@
         <div id="map"></div>
       </div>
       <div class="panel">
+        <div class="oddo">
+          <div class="poczatek">
+            <label for="" style="color: white">Start Wyjazdu</label>
+            <input id="data-startu-wyjazdu" type="date" name="trip-start" />
+            <input id="czas-startu-wyjazdu" type="time" name="" /><br />
+          </div>
+          <!--
+              <div class="zakonczenie">
+            <label for="" style="color: white">Koniec Wyjazdu</label>
+            <input id="data-konca-wyjazdu" type="date" name="trip-end" />
+            <input id="czas-konca-wyjazdu" type="time" name="" />
+          </div>
+          -->
+        </div>
+
         <div class="panel-wyjazdu">
-          <input class="input-panel input-p" type="text" placeholder="Kraj" />
           <input
-            id="location-input"
+            id="country"
+            class="input-panel input-p"
+            type="text"
+            placeholder="Kraj"
+          />
+          <input
+            id="city"
             class="input-panel input-p"
             type="text"
             placeholder="Miasto"
           />
+          <input
+            id="place"
+            class="input-panel input-p"
+            type="text"
+            placeholder="Nazwa Miejsce"
+          />
+          <input
+            id="address"
+            class="input-panel input-p"
+            type="text"
+            placeholder="Adres"
+          />
 
-          <input class="input-panel input-p" type="text" placeholder="Adres" />
-
+          <input
+            id="zipcode"
+            class="input-panel input-p"
+            type="text"
+            placeholder="Kod Pocztowy"
+          />
           <input class="input-panel input-p" type="text" placeholder="Cel" />
           <input
             id="ilosc-osob"
@@ -114,24 +132,13 @@
             placeholder="Koszt na Osobe"
             readonly
           />
-
-          <div class="oddo">
-            <div class="poczatek">
-              <label for="" style="color: white">Start Wyjazdu</label>
-              <input id="data-startu-wyjazdu" type="date" name="trip-start" />
-              <input id="czas-startu-wyjazdu" type="time" name="" /><br />
-            </div>
-            <div class="zakonczenie">
-              <label for="" style="color: white">Koniec Wyjazdu</label>
-              <input id="data-konca-wyjazdu" type="date" name="trip-end" />
-              <input id="czas-konca-wyjazdu" type="time" name="" />
-            </div>
-          </div>
-          <div class="textarea-container">
-            <textarea class="panel-opis" placeholder="opis"></textarea>
-            <div id="wordCount">0/150</div>
-          </div>
         </div>
+        <div class="textarea-container">
+          <textarea class="panel-opis" placeholder="opis"></textarea>
+          <div id="wordCount">0/150</div>
+        </div>
+
+        <p id="dane"></p>
         <button id="dojazd">dojazd</button>
         <div class="zapisywanie">
           <button class="zapisz" id="zapisz">Zapisz</button>
@@ -182,16 +189,7 @@
       defer
     ></script>
     <script src="app.js"></script>
+    <script src="user.js"></script>
     <script src="maps.js"></script>
-    <script>
-        
-        function onPageLoad() {
-            var login = sessionStorage.getItem("login");
-            var user = document.getElementById("login");
-            user.style.display = "block";
-            document.getElementById("login").innerHTML = login;
-        }
-        window.addEventListener('load', onPageLoad);
-    </script>
   </body>
 </html>

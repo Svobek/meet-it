@@ -25,8 +25,12 @@
         </a>
       </div>
       <div class="logout">
-        <button class="wyloguj">
+        <button id="loginButton" class="wyloguj">
           <a class="out" href="logowanie.html">Zaloguj się</a>
+        </button>
+        <span id="username">Cześć, </span>
+        <button id="logoutButton" class="wyloguj">
+          <a class="out" onclick="logout()">Wyloguj</a>
         </button>
       </div>
     </div>
@@ -64,7 +68,6 @@
             /></a>
           </div>
           -->
-
         </div>
         <div class="lista-wyjazdow"></div>
       </div>
@@ -108,6 +111,7 @@
         <p id="data"></p>
       </div>
     </div>
+    <script src="user.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

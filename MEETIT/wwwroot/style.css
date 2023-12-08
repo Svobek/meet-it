@@ -122,15 +122,13 @@ h2 {
   background: none;
 }
 .link {
-    text-decoration: none;
-    color: white;
-    background: none;
-    position: relative;
-    overflow: hidden;
-    width: 125px;
-    border: none;
-    padding: 0;
-    margin: 0;
+  text-decoration: none;
+  color: white;
+  background: none;
+  position: relative;
+  overflow: hidden;
+  width: 125px;
+  cursor: pointer;
 }
 .link::after {
   content: '';
@@ -158,14 +156,6 @@ h2 {
   border-radius: 20px;
   width: 100px;
   height: 35px;
-}
-.wyloguj2 {
-    background: yellow;
-    color: black;
-    border: 2px solid black;
-    border-radius: 20px;
-    width: 100px;
-    height: 35px;
 }
 .czasidata {
   padding: 0;
@@ -372,7 +362,7 @@ h2 {
 }
 .logout
 {
-  width: 10%;
+  width: 15%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -475,8 +465,8 @@ width: 7%;
 }
 .input-panel
 {
-  border: 1px solid white;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid white;
   background: none;
   color: white;
   margin: 10px;
@@ -489,15 +479,22 @@ width: 7%;
 }
 .panel-opis
 {
+  border: 1px solid white;
+  padding: 5px 5px 0;
+  border-radius: 10px;
+  color: white;
+  background: none;
   width: 100%;
   height: 100%;
   resize: none;
 }
 .panel-wyjazdu
 {
+  margin: 0px 15px 0px 15px ;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .textarea-container {
   position: relative;
@@ -505,6 +502,7 @@ width: 7%;
   width: 300px;
 }
 #wordCount {
+  color: white;
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -724,6 +722,9 @@ width: 7%;
   border: 1px solid black;
   margin: 5px;
 }
-
-
-
+#username
+{
+  color: white;
+  margin-right: 15px;
+  font-size: 20px;
+}

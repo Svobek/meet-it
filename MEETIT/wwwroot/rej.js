@@ -104,3 +104,5 @@ document.addEventListener('DOMContentLoaded', function () {
   returnPasswordInput.addEventListener('blur', function() {
     passwordInfo.style.display = 'none';
   });
+
+
