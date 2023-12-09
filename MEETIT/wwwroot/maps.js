@@ -112,7 +112,7 @@ window.onload = function () {
             list.appendChild(li);
         }
     }
-    
+    insertMarkerInfoToInputs();
 }
    
 
@@ -158,6 +158,9 @@ function ADDtoList() {
 }
 
 
+
+
+
 //add function to insert marker innformation to inputs when clicked on list element
 function insertMarkerInfoToInputs() {
     var list = document.getElementById('list');
@@ -181,10 +184,8 @@ function insertMarkerInfoToInputs() {
         
     }
     
-    
-   
-
 }
+
 //call google route api with markers from session storage and display route on map
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
@@ -216,6 +217,7 @@ document.getElementById('zapisz').addEventListener('click', function () {
     calculateAndDisplayRoute(directionsService, directionsRenderer);
     directionsRenderer.setMap(map);
 });
+
 
 
 
