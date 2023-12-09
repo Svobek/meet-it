@@ -1,4 +1,4 @@
-var map;
+let map;
 function initAutocomplete() {
     var mapP = {
         center: { lat: 51.9194, lng: 19.1451 },
@@ -6,7 +6,60 @@ function initAutocomplete() {
         mapTypeId: "roadmap",
     };
   map = new google.maps.Map(document.getElementById("map"), mapP);
-  const input = document.getElementById("pac-input");
+
+// Pobierz element input
+const input = document.getElementById("pac-input");
+
+// Stwórz nowy element button
+const button = document.createElement("button");
+button.id = "zapisz-lokalizacje";
+button.textContent = "Zapisz lokalizacje";
+
+
+// Dodaj style do przycisku
+button.className = "zapisz-lokalizacje";
+
+// Dodaj przycisk do kontrolek mapy
+map.controls[google.maps.ControlPosition.TOP_LEFT].push(button);
+
+// Dodaj przycisk do rodzica elementu input
+input.parentNode.insertBefore(button, input.nextSibling);
+
+// Dodaj nasłuchiwacz zdarzeń do przycisku
+button.addEventListener('click', function() {
+    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    if (markersArray == null) {
+        markersArray = [];
+    }
+    //if null dont add to array
+    if (document.getElementById('place').value == '') {
+
+    }
+    else {
+        markersArray.push(
+            {
+                'nazwa': document.getElementById('place').value,
+                'kraj': document.getElementById('country').value,
+                'miasto': document.getElementById('city').value,
+                'adres': document.getElementById('address').value,
+                'kod': document.getElementById('zipcode').value,
+                'punkt': JSON.parse(sessionStorage.getItem('punkt'))
+            });
+
+        sessionStorage.setItem('markersArray', JSON.stringify(markersArray));
+        var list = document.getElementById('list');
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(document.getElementById('place').value));
+        list.appendChild(li);
+        document.getElementById('place').value = '';
+        document.getElementById('country').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('address').value = '';
+        document.getElementById('zipcode').value = '';
+        console.log(markersArray);
+        insertMarkerInfoToInputs();
+    }
+});
   const searchBox = new google.maps.places.SearchBox(input);
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -100,29 +153,49 @@ window.initAutocomplete = initAutocomplete;
 
 //write function to load list on page load
 window.onload = function () {
-    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    if (markersArray == null) {
-        markersArray = [];
+  var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+  if (markersArray == null) {
+      markersArray = [];
+  }
+  else {
+      var list = document.getElementById('list');
+      function createClickListener(div, index) {
+        return function() {
+            div.remove();
+            markersArray.splice(index, 1); // Usuń element z tablicy
+            sessionStorage.setItem('markersArray', JSON.stringify(markersArray)); // Zaktualizuj tablicę w sessionStorage
+        };
     }
-    else {
-        var list = document.getElementById('list');
-        for (var i = 0; i < markersArray.length; i++) {
-            var li = document.createElement('li');
-            li.appendChild(document.createTextNode(markersArray[i].nazwa));
-            list.appendChild(li);
-        }
-    }
-    insertMarkerInfoToInputs();
-}
-   
+    
+    for (var i = 0; i < markersArray.length; i++) {
+      var div = document.createElement('div');
+      var li = document.createElement('li');
+      var img = document.createElement('img');
 
+      img.src = 'images/kosz.png';
+
+      img.addEventListener('click', createClickListener(div, i));
+
+      li.appendChild(document.createTextNode(markersArray[i].nazwa));
+      li.className = "li-list";
+      img.className = "li-img";
+      div.className = "div-list";
+      div.appendChild(li); // Dodaj li do div
+      div.appendChild(img); // Dodaj img do div
+   
+      list.appendChild(div);
+    }
+  }
+  insertMarkerInfoToInputs();
+}
+
+$( function() {
+  $( "#list" ).sortable();
+  $( "#list" ).disableSelection();
+} );
 
 //add event listener to add markers to session storage and list them on list
-document.getElementById('dojazd').addEventListener('click', function () {
-ADDtoList();
-});
-
-function ADDtoList() {
+document.getElementById('zapisz-lokalizacje').addEventListener('click', function() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
     if (markersArray == null) {
         markersArray = [];
@@ -155,7 +228,7 @@ function ADDtoList() {
         console.log(markersArray);
         insertMarkerInfoToInputs();
     }
-}
+});
 
 
 //add function to insert marker innformation to inputs when clicked on list element
@@ -182,8 +255,7 @@ function insertMarkerInfoToInputs() {
     }
     
     
-   
-
+  
 }
 //call google route api with markers from session storage and display route on map
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {

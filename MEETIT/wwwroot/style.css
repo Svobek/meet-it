@@ -296,48 +296,7 @@ h2 {
   align-items: center;
   justify-content: center;
 }
-.wyszukaj {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-radius: 20px;
-  margin: 10px 0 0 100px;
-  position: absolute;
-  background: white;
-  width: 300px;
-  height: 40px;
-  z-index: 1;
-}
-.search {
-  border: 0;
-  font-size: 14px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  height: 30px;
-  width: 200px;
-  margin-left: 10px;
-}
-.search:focus {
-  outline: none;
-  border: none;
-}
-.button-cta {
-  height: 35px;
-  width: 35px;
-  color: white;
-  font-size: 15px;
-  background: none;
-  border: none;
-}
-.button-cta:hover {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-.i-search {
-  width: 20px;
-  height: 20px;
-}
+
 #mapaa
 {
   height: 100%;
@@ -473,12 +432,17 @@ width: 7%;
   font-size: 20px;
   height: 30px;
 }
+.input-cel
+{
+  margin-left: 150px;
+}
 .input-p
 {
   width: 250px;
 }
 .panel-opis
 {
+  margin-left: 15px;
   border: 1px solid white;
   padding: 5px 5px 0;
   border-radius: 10px;
@@ -494,7 +458,6 @@ width: 7%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 .textarea-container {
   position: relative;
@@ -506,6 +469,70 @@ width: 7%;
   position: absolute;
   bottom: 10px;
   right: 10px;
+}
+.lista-lokalizacji
+{
+  overflow-y: scroll; 
+  height: 280px;
+  width: 500px;
+  border-radius: 20px;
+  color: white; 
+  border: 1px solid white;
+  margin-left: 20px
+}
+
+.dane-lokalizacji
+{
+  margin-top: 10px;
+  height: 280px;
+  border-radius: 20px;
+  padding: 5px;
+}
+#list
+{
+  width: 100%;
+  height: 100%;
+}
+ol
+{
+  padding: 0;
+  margin: 0;
+}
+#list li
+{
+  height: 25px;
+  width: 90%;
+  font-size: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 15px 0px 15px 10px ;
+}
+#list div:hover
+{
+  background: rgba(0, 0, 0, 0.5);
+}
+#list li:last-child
+{
+  border-bottom: none;
+}
+.li-img
+{
+  padding-left: 15px;
+  width: 20px;
+  height: 100%;
+  margin-right: 10px;
+  border-left: 2px solid white;
+  padding-right: 10px;
+}
+.div-list
+{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+.div-list:last-child
+{
+  border-bottom: none;
 }
 /*--------------------------------Kontakt--------------------------------------------------------*/
 .kontakt
@@ -536,6 +563,7 @@ width: 7%;
 {
   margin: 20px;
 }
+
 .tresc
 {
   margin: 20px;
@@ -630,9 +658,6 @@ width: 7%;
   margin-left: 50px;
   
 }
-
-
-
 #map {
   height: 100%;
   width: 100%;
@@ -672,7 +697,15 @@ width: 7%;
   padding-bottom: 12px;
   margin-right: 12px;
 }
-
+.data-wyj
+{
+  font-size: 20px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid white;
+  padding: 10px;
+}
 .pac-controls {
   display: inline-block;
   padding: 5px 11px;
@@ -689,7 +722,7 @@ width: 7%;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 115px;
+  margin-left: 14px;
   margin-top: 10px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
@@ -727,4 +760,28 @@ width: 7%;
   color: white;
   margin-right: 15px;
   font-size: 20px;
+}
+.zapisane-trasy
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  position: static;
+}
+.zapisz-lokalizacje
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
 }
