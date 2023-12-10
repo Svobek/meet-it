@@ -41,7 +41,7 @@ async function loginUser() {
 
         if (response.status === 200) {
             sessionStorage.setItem('token', data);
-            let userResponse = await fetch('https://meeetit.azurewebsites.net/User/GetUserByLogin/' + loginValue);
+            let userResponse = await fetch('https://meeetit.azurewebsites.net/User/GetUserByLogin?login=' + loginValue);
             let userData = await userResponse.json();
             sessionStorage.setItem('userId', userData.id);
             sessionStorage.setItem('login', loginValue);
