@@ -15,17 +15,16 @@ namespace meetit.Controllers
         // make endpoint to add point
         public IActionResult AddPoint([FromBody] Points point)
         {
-            
+            var lastId = _context.Points.OrderByDescending(u => u.PointID).FirstOrDefault().PointID;
+            point.PointID = lastId + 1;
             if (point == null)
             {
                 return BadRequest("Invalid point data");
             }
-            var lastId = _context.Points.OrderByDescending(u => u.PointID).FirstOrDefault().PointID;
-            point.PointID = lastId + 1;
             _context.Points.Add(point);
             _context.SaveChanges();
 
-            return Ok("Point added successfully");
+            return Ok(point.PointID);
         }
 
         //make endpoint to get all points by track id
@@ -49,7 +48,7 @@ namespace meetit.Controllers
             {
                 return BadRequest("Invalid point data");
             }
-
+            
             _context.PointValues.Add(pointvalue);
             _context.SaveChanges();
 

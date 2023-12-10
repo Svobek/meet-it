@@ -316,7 +316,7 @@ function displayRoute() {
 //make function to add route to database use fetch
 function addRouteToDatabase() {
     
-    var route = {
+    var routeName = {
         'Name': document.getElementById('cel').value,
     }
     //if cel is null dont add to database
@@ -324,23 +324,27 @@ function addRouteToDatabase() {
         alert('Wpisz nazwę trasy');
     }
     else {
-
+        console.log(routeName);
         fetch('https://meeetit.azurewebsites.net/Track/AddTrack', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(route),
+            body: JSON.stringify(routeName),
         })
             .then(response => response.json())
             .then(data => {
-                sessionStorage.setItem('trackID', JSON.stringify(data));
+                var trackID = data;
+                console.log(trackID);
+                sessionStorage.setItem('trackID', trackID);
+                addUserTrackToDatabase();
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
 
     }
+    
 }
 
 //make function to add all markers from session storage to database use fetch
@@ -349,15 +353,15 @@ function addMarkersToDatabase() {
     var routes =[];
     for (var i = 0; i < markersArray.length; i++) {
         var marker = {
-            'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
-            'PointInTrackID': i,
+            'TrackID':JSON.parse(sessionStorage.getItem('trackID')),
+            'PointInTrackId': i.toString(),
             'xParm': markersArray[i].punkt.lat,
             'yParm': markersArray[i].punkt.lng,
             'PointName': markersArray[i].nazwa
         }
         routes.push(marker);
     }
-
+    console.log(routes);
 
     fetch('https://meeetit.azurewebsites.net/Point/AddPoint', {
         method: 'POST',
@@ -366,7 +370,7 @@ function addMarkersToDatabase() {
         },
         body: JSON.stringify(routes),
     })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
             
@@ -374,6 +378,7 @@ function addMarkersToDatabase() {
         .catch((error) => {
             console.error('Error:', error);
         });
+    addPointValuesToDatabase();
 }
     
 
@@ -382,9 +387,10 @@ function addMarkersToDatabase() {
 function addUserTrackToDatabase() {
 var userTrack = {
         'idUsers': JSON.parse(sessionStorage.getItem('userId')),
-        'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
-        'isAdmin': 1
+        'idTracks': JSON.parse(sessionStorage.getItem('trackID')),
+        'isAdmin': "1"
     }
+    console.log(userTrack);
     fetch('https://meeetit.azurewebsites.net/User/ConnectUserAndTrack', {
         method: 'POST',
         headers: {
@@ -392,13 +398,14 @@ var userTrack = {
         },
         body: JSON.stringify(userTrack),
     })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+    addMarkersToDatabase();
 }
 
 function addPointValuesToDatabase() {
@@ -414,22 +421,23 @@ function addPointValuesToDatabase() {
         route.push(pointValues);
     }
 
-
-    fetch('https://meeetit.azurewebsites.net/Point/AddPointVaules', {
+    console.log(route);
+    /*fetch('https://meeetit.azurewebsites.net/Point/AddPointValues', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(route),
     })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log('Success:', data);
             
         })
         .catch((error) => {
             console.error('Error:', error);
-        });
+        });*/
+    displayRoute();
 }
 
 
@@ -448,10 +456,6 @@ var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
 
 function zapiszTrase() {
     addRouteToDatabase();
-    addMarkersToDatabase();
-    addUserTrackToDatabase();
-    addPointValuesToDatabase();
-    displayRoute();
 }
 
 
