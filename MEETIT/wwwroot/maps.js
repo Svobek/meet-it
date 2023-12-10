@@ -83,6 +83,7 @@ button.addEventListener('click', function() {
 
         console.log(markersArray);
         insertMarkerInfoToInputs();
+        addPriceToInput();
     }
 });
   const searchBox = new google.maps.places.SearchBox(input);
@@ -210,7 +211,9 @@ window.onload = function () {
       list.appendChild(div);
     }
   }
-  insertMarkerInfoToInputs();
+    insertMarkerInfoToInputs();
+    addPriceToInput();
+
 }
 
 
@@ -312,7 +315,7 @@ function displayRoute() {
 
 //make function to add route to database use fetch
 function addRouteToDatabase() {
-    console.log('add route to database');
+    
     var route = {
         'Name': document.getElementById('cel').value,
     }
@@ -343,7 +346,7 @@ function addRouteToDatabase() {
 //make function to add all markers from session storage to database use fetch
 function addMarkersToDatabase() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    var route;
+    var routes =[];
     for (var i = 0; i < markersArray.length; i++) {
         var marker = {
             'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
@@ -352,7 +355,7 @@ function addMarkersToDatabase() {
             'yParm': markersArray[i].punkt.lng,
             'Name': markersArray[i].nazwa
         }
-        route.push(marker);
+        routes.push(marker);
     }
 
 
@@ -361,23 +364,19 @@ function addMarkersToDatabase() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(route),
+        body: JSON.stringify(routes),
     })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            alert('Trasa została dodana');
+            
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
     
-function zapiszTrase() {
-    addRouteToDatabase();
-    addMarkersToDatabase();
-    displayRoute();
-}
+
 
 //function to add to table Users_Tracks in database
 function addUserTrackToDatabase() {
@@ -404,15 +403,15 @@ var userTrack = {
 
 function addPointValuesToDatabase() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    var route;
+    var route=[];
     for (var i = 0; i < markersArray.length; i++) {
-        var marker = {
+        var pointValues = {
             'idPoint': i,
             'Price': markersArray[i].cena,
-            'date': markersArray[i].data,
-            'time': markersArray[i].godzina
+            'Date': markersArray[i].data,
+            'Time': markersArray[i].godzina
         }
-        route.push(marker);
+        route.push(pointValues);
     }
 
 
@@ -426,7 +425,7 @@ function addPointValuesToDatabase() {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            alert('Trasa została dodana');
+            
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -434,6 +433,26 @@ function addPointValuesToDatabase() {
 }
 
 
+//add price of every marker and display it on koszty input in real time every time marker is added or removed
+function addPriceToInput() {
+var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    var sum = 0;
+
+    for (var i = 0; i < markersArray.length; i++) {    
+        sum += parseInt(markersArray[i].cena);
+    }
+    document.getElementById('koszty').value = sum;
+}
+
+
+
+function zapiszTrase() {
+    addRouteToDatabase();
+    addMarkersToDatabase();
+    addUserTrackToDatabase();
+    addPointValuesToDatabase();
+    displayRoute();
+}
 
 
 

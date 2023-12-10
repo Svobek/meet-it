@@ -8,8 +8,8 @@ namespace meetit.Models
         public int PointID { get; set; }
         public int TrackID { get; set; }
         public required string PointInTrackID { get; set; }
-        public float xParm { get; set; }
-        public float yParm { get; set; }
+        public double xParm { get; set; }
+        public double yParm { get; set; }
         public required string PointName { get; set; }
     }
 }
