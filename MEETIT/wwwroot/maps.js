@@ -385,7 +385,7 @@ var userTrack = {
         'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
         'isAdmin': 1
     }
-    fetch('https://meeetit.azurewebsites.net/Track/AddUserTrack', {
+    fetch('https://meeetit.azurewebsites.net/USer/ConnectUserAndTrack', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
