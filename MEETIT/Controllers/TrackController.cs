@@ -25,7 +25,7 @@ namespace meetit.Controllers
             _context.Track.Add(track);
             _context.SaveChanges();
 
-            return Ok("Track added successfully");
+            return Ok(track.idTrack);
         }
        
 

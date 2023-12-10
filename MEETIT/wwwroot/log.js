@@ -40,8 +40,10 @@ async function loginUser() {
         }
 
         if (response.status === 200) {
-            const token = data;
-            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('token', data);
+            let userResponse = await fetch('https://meeetit.azurewebsites.net/User/GetUserByLogin/' + loginValue);
+            let userData = await userResponse.json();
+            sessionStorage.setItem('userId', userData.id);
             sessionStorage.setItem('login', loginValue);
             alert("Zalogowano pomyślnie!");
             loginInfoDiv.style.display = 'none'; // Ukryj div

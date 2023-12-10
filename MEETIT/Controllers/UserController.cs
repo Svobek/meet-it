@@ -82,7 +82,11 @@ namespace meetit.Controllers
             if (BCrypt.Net.BCrypt.Verify(users.psswd, user.psswd))
             {
                 var Token = GenerateToken(user.login);
-                return Ok(Token);
+                //return token and user id
+                return Ok(Token;
+
+
+                
                 
                 
             }
@@ -166,16 +170,13 @@ namespace meetit.Controllers
             }
         }
         
-        //get user id by login
-        public int GetUserIdByLogin(string login)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.login == login);
-            return user.id;
-        }
+        
 
         //connect user and track in Users_Tracks table
         public IActionResult ConnectUserAndTrack([FromBody] Users_Tracks users_Tracks)
         {
+            
+
             if (users_Tracks == null)
             {
                 return BadRequest("Invalid data");
@@ -185,7 +186,17 @@ namespace meetit.Controllers
 
             return Ok("User and track connected successfully");
         }
+        //get user id by login
+        public IActionResult GetUserByLogin(string login)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.login == login);
+            if (user == null)
+            {
+                return BadRequest("Invalid login");
+            }
 
+            return Ok(user.id);
+        }
 
         
 

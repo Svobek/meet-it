@@ -104,6 +104,23 @@ app.MapControllerRoute(
     name: "AddTrack",
     pattern: "{controller=Track}/{action=AddTrack}/");
 
+app.MapControllerRoute(
+    name: "AddPoint",
+    pattern: "{controller=Point}/{action=AddPoint}/{name?}");
+
+app.MapControllerRoute(
+    name: "AddPointValues",
+    pattern: "{controller=Point}/{action=AddPointValues}/{name?}");
+
+app.MapControllerRoute(
+    name: "User_Track",
+       pattern: "{controller=User}/{action=ConnectUserAndTrack}/{name?}");
+
+app.MapControllerRoute(
+    name: "User_Track",
+       pattern: "{controller=User}/{action=GetUserByLogin}/{name?}");
+
+
 
 
 

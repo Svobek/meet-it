@@ -44,7 +44,10 @@ button.addEventListener('click', function() {
                 'miasto': document.getElementById('city').value,
                 'adres': document.getElementById('address').value,
                 'kod': document.getElementById('zipcode').value,
-                'punkt': JSON.parse(sessionStorage.getItem('punkt'))
+                'punkt': JSON.parse(sessionStorage.getItem('punkt')),
+                'cena': document.getElementById('budzet').value,
+                'data': document.getElementById('data-startu-wyjazdu').value,
+                'godzina': document.getElementById('czas-startu-wyjazdu').value
             });
 
         sessionStorage.setItem('markersArray', JSON.stringify(markersArray));
@@ -74,6 +77,10 @@ button.addEventListener('click', function() {
         document.getElementById('city').value = '';
         document.getElementById('address').value = '';
         document.getElementById('zipcode').value = '';
+        document.getElementById('budzet').value = '';   
+        document.getElementById('data-startu-wyjazdu').value = '';
+        document.getElementById('czas-startu-wyjazdu').value = '';
+
         console.log(markersArray);
         insertMarkerInfoToInputs();
     }
@@ -253,6 +260,9 @@ function insertMarkerInfoToInputs() {
                     document.getElementById('city').value = markersArray[j].miasto;
                     document.getElementById('address').value = markersArray[j].adres;
                     document.getElementById('zipcode').value = markersArray[j].kod;
+                    document.getElementById('budzet').value = markersArray[j].cena;
+                    document.getElementById('data-startu-wyjazdu').value = markersArray[j].data;
+                    document.getElementById('czas-startu-wyjazdu').value = markersArray[j].godzina;
                     sessionStorage.setItem('punkt', JSON.stringify(markersArray[j].punkt));
                 }
             }
@@ -304,7 +314,7 @@ function displayRoute() {
 function addRouteToDatabase() {
     console.log('add route to database');
     var route = {
-        'nazwa': document.getElementById('cel').value,
+        'Name': document.getElementById('cel').value,
     }
     //if cel is null dont add to database
     if (document.getElementById('cel').value == '') {
@@ -321,7 +331,7 @@ function addRouteToDatabase() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                sessionStorage.setItem('trackID', JSON.stringify(data));
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -330,33 +340,100 @@ function addRouteToDatabase() {
     }
 }
 
-//make funcion to add markers to database use fetch
+//make function to add all markers from session storage to database use fetch
 function addMarkersToDatabase() {
-var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    if (markersArray == null) {
-        markersArray = [];
+    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    var route;
+    for (var i = 0; i < markersArray.length; i++) {
+        var marker = {
+            'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
+            'PointInTrackID': i,
+            'xParm': markersArray[i].punkt.lat,
+            'yParm': markersArray[i].punkt.lng,
+            'Name': markersArray[i].nazwa
+        }
+        route.push(marker);
     }
-    //if markersArray is null dont add to database
-    if (markersArray.length == 0) {
-        alert('Dodaj punkty do trasy');
-    }
-    else {
-        fetch('https://meeetit.azurewebsites.net/Track/AddTrack', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(markersArray),
+
+
+    fetch('https://meeetit.azurewebsites.net/Point/AddPoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(route),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('Trasa została dodana');
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
+    
+function zapiszTrase() {
+    addRouteToDatabase();
+    addMarkersToDatabase();
+    displayRoute();
+}
+
+//function to add to table Users_Tracks in database
+function addUserTrackToDatabase() {
+var userTrack = {
+        'idUsers': JSON.parse(sessionStorage.getItem('userId')),
+        'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
+        'isAdmin': 1
+    }
+    fetch('https://meeetit.azurewebsites.net/Track/AddUserTrack', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userTrack),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function addPointValuesToDatabase() {
+    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    var route;
+    for (var i = 0; i < markersArray.length; i++) {
+        var marker = {
+            'idPoint': i,
+            'Price': markersArray[i].cena,
+            'date': markersArray[i].data,
+            'time': markersArray[i].godzina
+        }
+        route.push(marker);
+    }
+
+
+    fetch('https://meeetit.azurewebsites.net/Point/AddPointVaules', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(route),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('Trasa została dodana');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+
 
 
 
