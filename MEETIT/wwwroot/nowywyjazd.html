@@ -45,7 +45,7 @@
             <label for="" style="color: white">Start Wyjazdu</label>
             <input id="data-startu-wyjazdu" type="date" name="trip-start" />
             <input id="czas-startu-wyjazdu" type="time" name="" />
-            <input class="input-panel input-p input-cel" type="text" placeholder="Cel Podrózy" />
+            <input class="input-panel input-p input-cel" type="text" id="cel" placeholder="Cel Podrózy" />
           </div>
           <div class="dane-lokalizacji" style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: column">
             <input id="country" class="input-panel input-p" type="text" placeholder="Kraj" />
@@ -69,7 +69,7 @@
           <div id="wordCount">0/150</div>
         </div>
         <div class="zapisywanie">
-          <button class="zapisz" id="zapisz">Zapisz Wyjazd</button>
+          <button class="zapisz" id="zapisz-trase" onclick="addRouteToDatabase()">Zapisz Wyjazd</button>
         </div>
       </div>
     </div>

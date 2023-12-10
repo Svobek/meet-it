@@ -1,4 +1,5 @@
 let map;
+var directionsRenderer;
 function initAutocomplete() {
     var mapP = {
         center: { lat: 51.9194, lng: 19.1451 },
@@ -49,8 +50,25 @@ button.addEventListener('click', function() {
         sessionStorage.setItem('markersArray', JSON.stringify(markersArray));
         var list = document.getElementById('list');
         var li = document.createElement('li');
+        var img = document.createElement('img');
+        var div = document.createElement('div');
+        img.src = 'images/kosz.png';
+        //function to remove chosen element from list and array
+        function createClickListener(div, index) {
+            return function () {
+                div.remove();
+                markersArray.splice(index, 1); // Usuń element z tablicy
+                sessionStorage.setItem('markersArray', JSON.stringify(markersArray)); // Zaktualizuj tablicę w sessionStorage
+            };
+        }
+        img.addEventListener('click', createClickListener(div, markersArray.length - 1));
         li.appendChild(document.createTextNode(document.getElementById('place').value));
-        list.appendChild(li);
+        li.className = "li-list";
+        img.className = "li-img";
+        div.className = "div-list";
+        div.appendChild(li); // Dodaj li do div
+        div.appendChild(img); // Dodaj img do div
+        list.appendChild(div);
         document.getElementById('place').value = '';
         document.getElementById('country').value = '';
         document.getElementById('city').value = '';
@@ -165,7 +183,7 @@ window.onload = function () {
             markersArray.splice(index, 1); // Usuń element z tablicy
             sessionStorage.setItem('markersArray', JSON.stringify(markersArray)); // Zaktualizuj tablicę w sessionStorage
         };
-    }
+      }
     
     for (var i = 0; i < markersArray.length; i++) {
       var div = document.createElement('div');
@@ -182,53 +200,42 @@ window.onload = function () {
       div.className = "div-list";
       div.appendChild(li); // Dodaj li do div
       div.appendChild(img); // Dodaj img do div
-   
       list.appendChild(div);
     }
   }
   insertMarkerInfoToInputs();
 }
 
-$( function() {
-  $( "#list" ).sortable();
-  $( "#list" ).disableSelection();
-} );
 
-//add event listener to add markers to session storage and list them on list
-document.getElementById('zapisz-lokalizacje').addEventListener('click', function() {
-    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    if (markersArray == null) {
-        markersArray = [];
-    }
-    //if null dont add to array
-    if (document.getElementById('place').value == '') {
 
-    }
-    else {
-        markersArray.push(
-            {
-                'nazwa': document.getElementById('place').value,
-                'kraj': document.getElementById('country').value,
-                'miasto': document.getElementById('city').value,
-                'adres': document.getElementById('address').value,
-                'kod': document.getElementById('zipcode').value,
-                'punkt': JSON.parse(sessionStorage.getItem('punkt'))
-            });
-
-        sessionStorage.setItem('markersArray', JSON.stringify(markersArray));
-        var list = document.getElementById('list');
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(document.getElementById('place').value));
-        list.appendChild(li);
-        document.getElementById('place').value = '';
-        document.getElementById('country').value = '';
-        document.getElementById('city').value = '';
-        document.getElementById('address').value = '';
-        document.getElementById('zipcode').value = '';
-        console.log(markersArray);
-        insertMarkerInfoToInputs();
-    }
+$(function test() {
+    //make elements change position in array when dragged and dropped
+    $("#list").sortable({
+        update: function (event, ui) {
+            var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+            var newMarkersArray = [];
+            var list = document.getElementById('list');
+            var listElements = list.getElementsByTagName('li');
+            for (var i = 0; i < listElements.length; i++) {
+                for (var j = 0; j < listElements.length; j++) {
+                    if (markersArray[j].nazwa == listElements[i].innerHTML) {
+                        newMarkersArray.push(markersArray[j]);
+                    }
+                }
+            }
+            sessionStorage.setItem('markersArray', JSON.stringify(newMarkersArray));
+        }
+    });
+    $("#list").disableSelection();
 });
+
+                
+
+
+
+
+        
+
 
 
 //add function to insert marker innformation to inputs when clicked on list element
@@ -281,13 +288,87 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         }
     });
 }
-//add event listener to button zapisz to display route on map
-document.getElementById('zapisz').addEventListener('click', function () {
-    var directionsService = new google.maps.DirectionsService();
-    var directionsRenderer = new google.maps.DirectionsRenderer();
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
+//add function to display route on map on button click
+
+function displayRoute() {
+    var directionsService = new google.maps.DirectionsService;
+    directionsRenderer = new google.maps.DirectionsRenderer;
+    directionsRenderer.setMap(null);
     directionsRenderer.setMap(map);
-});
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
+}
+
+
+
+//make function to add route to database use fetch
+function addRouteToDatabase() {
+    console.log('add route to database');
+    var route = {
+        'nazwa': document.getElementById('cel').value,
+    }
+    //if cel is null dont add to database
+    if (document.getElementById('cel').value == '') {
+        alert('Wpisz nazwę trasy');
+    }
+    else {
+
+        fetch('https://meeetit.azurewebsites.net/Track/AddTrack', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(route),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+    }
+}
+
+//make funcion to add markers to database use fetch
+function addMarkersToDatabase() {
+var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    if (markersArray == null) {
+        markersArray = [];
+    }
+    //if markersArray is null dont add to database
+    if (markersArray.length == 0) {
+        alert('Dodaj punkty do trasy');
+    }
+    else {
+        fetch('https://meeetit.azurewebsites.net/Track/AddTrack', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(markersArray),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

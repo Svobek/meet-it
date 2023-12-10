@@ -100,6 +100,12 @@ app.MapControllerRoute(
     name: "Token",
     pattern: "{controller=User}/{action=CheckToken}/{token?}");
 
+app.MapControllerRoute(
+    name: "AddTrack",
+    pattern: "{controller=Track}/{action=AddTrack}/");
+
+
+
 
 
 

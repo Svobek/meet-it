@@ -165,6 +165,27 @@ namespace meetit.Controllers
                 return BadRequest("Token is invalid");
             }
         }
+        
+        //get user id by login
+        public int GetUserIdByLogin(string login)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.login == login);
+            return user.id;
+        }
+
+        //connect user and track in Users_Tracks table
+        public IActionResult ConnectUserAndTrack([FromBody] Users_Tracks users_Tracks)
+        {
+            if (users_Tracks == null)
+            {
+                return BadRequest("Invalid data");
+            }
+            _context.Users_Tracks.Add(users_Tracks);
+            _context.SaveChanges();
+
+            return Ok("User and track connected successfully");
+        }
+
 
         
 
