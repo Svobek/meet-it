@@ -83,7 +83,7 @@ namespace meetit.Controllers
             {
                 var Token = GenerateToken(user.login);
                 //return token and user id
-                return Ok(Token;
+                return Ok(Token);
 
 
                 
