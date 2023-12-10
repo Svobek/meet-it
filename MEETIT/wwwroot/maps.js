@@ -353,7 +353,7 @@ function addMarkersToDatabase() {
             'PointInTrackID': i,
             'xParm': markersArray[i].punkt.lat,
             'yParm': markersArray[i].punkt.lng,
-            'Name': markersArray[i].nazwa
+            'PointName': markersArray[i].nazwa
         }
         routes.push(marker);
     }
@@ -385,7 +385,7 @@ var userTrack = {
         'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
         'isAdmin': 1
     }
-    fetch('https://meeetit.azurewebsites.net/USer/ConnectUserAndTrack', {
+    fetch('https://meeetit.azurewebsites.net/User/ConnectUserAndTrack', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -408,8 +408,8 @@ function addPointValuesToDatabase() {
         var pointValues = {
             'idPoint': i,
             'Price': markersArray[i].cena,
-            'Date': markersArray[i].data,
-            'Time': markersArray[i].godzina
+            'date': markersArray[i].data,
+            'time': markersArray[i].godzina
         }
         route.push(pointValues);
     }
