@@ -348,36 +348,40 @@ function addRouteToDatabase() {
 }
 
 //make function to add all markers from session storage to database use fetch
-function addMarkersToDatabase() {
+async function addMarkersToDatabase() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    var routes =[];
-    for (var i = 0; i < markersArray.length; i++) {
-        var marker = {
-            'TrackID':JSON.parse(sessionStorage.getItem('trackID')),
-            'PointInTrackId': i.toString(),
-            'xParm': markersArray[i].punkt.lat,
-            'yParm': markersArray[i].punkt.lng,
-            'PointName': markersArray[i].nazwa
+    var PointID = [];
+    try {
+        for (var i = 0; i < markersArray.length; i++) {
+            var marker = {
+                'TrackID': JSON.parse(sessionStorage.getItem('trackID')),
+                'PointInTrackId': i.toString(),
+                'xParm': markersArray[i].punkt.lat,
+                'yParm': markersArray[i].punkt.lng,
+                'PointName': markersArray[i].nazwa
+            }
+            console.log(marker);
+            let response = await fetch('https://meeetit.azurewebsites.net/Point/AddPoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(marker),
+            })
+            let data = await response.text();
+            if (response.ok) {
+                var idPoint = data;
+                PointID.push(idPoint);
+                console.log("Success:", idPoint);
+            }
         }
-        routes.push(marker);
     }
-    console.log(routes);
+    catch (error) {
+        console.error('Fetch error:', error);
+    }
+    
 
-    fetch('https://meeetit.azurewebsites.net/Point/AddPoint', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(routes),
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-            
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+    sessionStorage.setItem('pointidarray', JSON.stringify(PointID));
     addPointValuesToDatabase();
 }
     
@@ -410,18 +414,19 @@ var userTrack = {
 
 function addPointValuesToDatabase() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    var route=[];
+    var idarray = JSON.parse(sessionStorage.getItem('pointidarray'));
+    console.log(idarray);
     for (var i = 0; i < markersArray.length; i++) {
         var pointValues = {
-            'idPoint': i,
+            'idPoint': idarray[i],
             'Price': markersArray[i].cena,
             'date': markersArray[i].data,
             'time': markersArray[i].godzina
         }
-        route.push(pointValues);
+        console.log(pointValues);
     }
 
-    console.log(route);
+    
     /*fetch('https://meeetit.azurewebsites.net/Point/AddPointValues', {
         method: 'POST',
         headers: {
