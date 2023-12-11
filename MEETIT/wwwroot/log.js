@@ -46,8 +46,6 @@ async function loginUser() {
             sessionStorage.setItem('userId', userData);
             sessionStorage.setItem('login', loginValue);
             let id= sessionStorage.getItem('userId');
-            console.log(id);
-            alert("Zalogowano pomyślnie!");
             loginInfoDiv.style.display = 'none'; // Ukryj div
             window.location.href = '/index.html';
         } 

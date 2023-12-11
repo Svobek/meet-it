@@ -121,6 +121,14 @@ app.MapControllerRoute(
        pattern: "{controller=User}/{action=GetUserByLogin}/{name?}");
 
 
+app.MapControllerRoute(
+    name: "User_Track",
+       pattern: "{controller=User}/{action=GetTrackNames}/{id?}");
+
+app.MapControllerRoute(
+    name: "User_Track",
+       pattern: "{controller=User}/{action=GetAllTrackPoints}/{id?}");
+
 
 
 

@@ -179,6 +179,11 @@ window.initAutocomplete = initAutocomplete;
 
 //write function to load list on page load
 window.onload = function () {
+    var trackname = sessionStorage.getItem('trackName');
+    console.log();
+    if (trackname != null) {
+        document.getElementById('cel').value = trackname;
+    }
   var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
   if (markersArray == null) {
       markersArray = [];
@@ -412,37 +417,35 @@ var userTrack = {
     addMarkersToDatabase();
 }
 
-function addPointValuesToDatabase() {
+async function addPointValuesToDatabase() {
     var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
     var idarray = JSON.parse(sessionStorage.getItem('pointidarray'));
     console.log(idarray);
-    for (var i = 0; i < markersArray.length; i++) {
-        var pointValues = {
-            'idPoint': idarray[i],
-            'Price': markersArray[i].cena,
-            'date': markersArray[i].data,
-            'time': markersArray[i].godzina
-        }
-        console.log(pointValues);
+    try {
+        for (var i = 0; i < markersArray.length; i++) {
+            var pointValues = {
+                'idPoint': idarray[i],
+                'Price': markersArray[i].cena,
+                'date': markersArray[i].data,
+                'time': String(markersArray[i].godzina)+":00"
+            }
+            console.log(pointValues);
+            let response = await fetch('https://meeetit.azurewebsites.net/Point/AddPointValues', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pointValues),
+            })
+            let data = await response.text();
+            if (response.ok) {
+                console.log("Success:", data);
+            }
+        }             
     }
-
-    
-    /*fetch('https://meeetit.azurewebsites.net/Point/AddPointValues', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(route),
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Success:', data);
-            
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });*/
-    displayRoute();
+    catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 

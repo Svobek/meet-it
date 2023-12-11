@@ -138,7 +138,7 @@ async function checkIfLoggedInTW() {
             window.location.href = '/logowanie.html';
         }
         if (response.status === 200) {
-            window.location.href = '/twojwyjazd.html';
+            window.location.href = '/wyjazdy.html';
         }
     } catch (error) {
         console.error('Fetch error:', error);

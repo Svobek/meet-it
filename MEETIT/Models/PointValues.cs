@@ -6,7 +6,6 @@ namespace meetit.Models
     {
         [Key]
         public int idPointValues { get; set; }
-
         public int idPoint { get; set; }
         public double Price { get; set; }
         public DateOnly date { get; set; }

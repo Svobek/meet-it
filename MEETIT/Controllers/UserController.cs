@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.VisualBasic;
 using System.CodeDom.Compiler;
+using System.Text.Json;
 
 
 namespace meetit.Controllers
@@ -199,6 +200,75 @@ namespace meetit.Controllers
         }
 
         
+        //write method to get all track names from table Track by idUsers
+        public IActionResult GetTrackNames(int idUsers)
+        {
+            var trackNames = _context.Users_Tracks.Where(u => u.idUsers == idUsers).Select(u => u.idTracks).ToList();
+            var tracks = _context.Track.Where(t => trackNames.Contains(t.idTrack)).ToList();
+            //call method from TrackController to get first track point name from table Points by track id sorted by PointInTrackId
+            string[] pointsF=new string [tracks.Count];
+            string[] pointsL = new string[tracks.Count];
+            dynamic[] result= new dynamic [tracks.Count];
+            DateOnly[] dates = new DateOnly[tracks.Count];
+            for (int i = 0; i < tracks.Count; i++)
+            {
+                pointsF[i] = GetFirstTrackPointName(tracks[i].idTrack).pointName;
+                dates[i] = GetFirstTrackPointName(tracks[i].idTrack).pointValue;
+                pointsL[i] = GetLastTrackPointName(tracks[i].idTrack);
+                result[i] = new { tracks[i].idTrack, tracks[i].Name, date= dates[i], FPointName = pointsF[i], LPointName = pointsL[i] };
+            }
+            return Ok(result);
+        }
+
+
+        
+        public struct Point
+        {
+            public string pointName;
+            public DateOnly pointValue;
+        }
+        //get first track point name from table Points by track id sorted by PointInTrackId
+        public Point GetFirstTrackPointName(int id)
+        {
+            var point = _context.Points.FirstOrDefault(u => u.TrackID == id);
+            var pointValue = _context.PointValues.Where(u => u.idPoint == point.PointID).OrderBy(u => u.date).FirstOrDefault();
+            Point point1 = new Point();
+            point1.pointName = point.PointName;
+            point1.pointValue = pointValue.date;
+            return (point1);
+
+ 
+        }
+
+        public string GetLastTrackPointName(int id)
+        {
+            
+            var lastPointInTrackId = _context.Points.Where(u => u.TrackID == id).OrderByDescending(u => u.PointInTrackId).FirstOrDefault();
+            if (lastPointInTrackId == null)
+            {
+                return ("Invalid track id");
+            }
+
+            return (lastPointInTrackId.PointName);
+        }
+
+        
+
+        public IActionResult GetAllTrackPoints(int idTrack)
+        {
+            var trackPoints = _context.Points.Where(u => u.TrackID == idTrack).OrderBy(u=>u.PointInTrackId).ToList();
+            PointValues pointValues=null;
+            dynamic[] dyn = new dynamic[trackPoints.Count]; 
+            for(int i = 0; i < trackPoints.Count; i++)
+            {
+                pointValues = _context.PointValues.Where(u => u.idPoint == trackPoints[i].PointID).OrderBy(u => u.idPoint).FirstOrDefault();
+                dyn[i] = new { Points = trackPoints[i], pointValues };
+            }
+            return Ok(dyn);
+        }
+
+
+
 
 
 

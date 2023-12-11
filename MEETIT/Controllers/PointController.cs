@@ -42,6 +42,7 @@ namespace meetit.Controllers
         //make endpoint to add point values 
         public IActionResult AddPointValues([FromBody] PointValues pointvalue)
         {
+            
             var lastId = _context.PointValues.OrderByDescending(u => u.idPointValues).FirstOrDefault().idPointValues;
             pointvalue.idPointValues = lastId + 1;
             if (pointvalue == null)

@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\nowywyjazd.cshtml" />
+    <Content Remove="wwwroot\wyjazdy.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\wyjazdy.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +30,7 @@
     <None Include="wwwroot\twojwyjazd.html" />
     <None Include="wwwroot\wkrótce.html" />
     <None Include="wwwroot\wyjazdy.html" />
+    <None Include="wwwroot\wyjazdy.js" />
   </ItemGroup>
 
   <ItemGroup>
