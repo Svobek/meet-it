@@ -45,7 +45,7 @@ button.addEventListener('click', function() {
                 'adres': document.getElementById('address').value,
                 'kod': document.getElementById('zipcode').value,
                 'punkt': JSON.parse(sessionStorage.getItem('punkt')),
-                'cena': document.getElementById('budzet').value,
+                'cena': document.getElementById('kosz-atrakcji').value,
                 'data': document.getElementById('data-startu-wyjazdu').value,
                 'godzina': document.getElementById('czas-startu-wyjazdu').value
             });
@@ -77,7 +77,7 @@ button.addEventListener('click', function() {
         document.getElementById('city').value = '';
         document.getElementById('address').value = '';
         document.getElementById('zipcode').value = '';
-        document.getElementById('budzet').value = '';   
+        document.getElementById('kosz-atrakcji').value = '';   
         document.getElementById('data-startu-wyjazdu').value = '';
         document.getElementById('czas-startu-wyjazdu').value = '';
 
@@ -268,7 +268,7 @@ function insertMarkerInfoToInputs() {
                     document.getElementById('city').value = markersArray[j].miasto;
                     document.getElementById('address').value = markersArray[j].adres;
                     document.getElementById('zipcode').value = markersArray[j].kod;
-                    document.getElementById('budzet').value = markersArray[j].cena;
+                    document.getElementById('kosz-atrakcji').value = markersArray[j].cena;
                     document.getElementById('data-startu-wyjazdu').value = markersArray[j].data;
                     document.getElementById('czas-startu-wyjazdu').value = markersArray[j].godzina;
                     sessionStorage.setItem('punkt', JSON.stringify(markersArray[j].punkt));

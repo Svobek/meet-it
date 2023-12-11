@@ -42,33 +42,47 @@
       <div class="panel">
         <div class="panel-wyjazdu">
           <div class="data-wyj">
-            <label for="" style="color: white">Start Wyjazdu</label>
+            <label for="" style="color: white; font-size: 25px">Start Wyjazdu</label>
             <input id="data-startu-wyjazdu" type="date" name="trip-start" />
             <input id="czas-startu-wyjazdu" type="time" name="" />
-            <input class="input-panel input-p input-cel" type="text" id="cel" placeholder="Cel Podrózy" />
+            <input class="input-panel input-p input-cel" type="text" placeholder="Cel Podrózy" />
           </div>
-          <div class="dane-lokalizacji" style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: column">
-            <input id="country" class="input-panel input-p" type="text" placeholder="Kraj" />
-            <input id="city" class="input-panel input-p" type="text" placeholder="Miasto" />
-            <input id="place" class="input-panel input-p" type="text" placeholder="Nazwa Miejsce" />
-            <input id="address" class="input-panel input-p" type="text" placeholder="Adres" />
-            <input id="zipcode" class="input-panel input-p" type="text" placeholder="Kod Pocztowy" />
+          <div class="s" style="display: flex">
+            <div class="panel-lok">
+              <div class="dane-lokalizacji" style="border: 1px solid white; border-radius: 10px; display: flex; flex-direction: column">
+                <input id="country" class="input-panel input-p" type="text" placeholder="Kraj" />
+                <input id="city" class="input-panel input-p" type="text" placeholder="Miasto" />
+                <input id="place" class="input-panel input-p" type="text" placeholder="Nazwa Miejsce" />
+                <input id="address" class="input-panel input-p" type="text" placeholder="Adres" />
+                <input id="zipcode" class="input-panel input-p" type="text" placeholder="Kod Pocztowy" />
+              </div>
+              <div class="reszta">
+                <input id="kosz-atrakcji" class="input-panel input-osoby" type="number" placeholder="Koszt Atrakcji" />
+                <input id="koszty" class="input-panel input-koszt" type="number" placeholder="Koszt Wyjazdu" />
+                <input id="koszt-osoba" class="input-panel input-kosztnaosobe" type="text" placeholder="Koszt na Osobe" readonly />
+              </div>
+            </div>
+            <div class="resztaopis">
+              <div class="lista-lokalizacji">
+                <div class="zapisane-trasy">Zapisane Lokalizacje</div>
+                <div class="lokalizacje">
+                  <ol id="list"></ol>
+                </div>
+                <div class="b-zapisane-trasy">
+                  <button class="zapisz-trase" id="zapisz-trase">Zakualizuj Trase</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="lista-lokalizacji">
-            <div class="zapisane-trasy">Zapisane Lokalizacje</div>
-            <ol id="list"></ol>
+          <div class="resztav2" style="display: flex">
+            <div class="textarea-container">
+              <textarea class="panel-opis" placeholder="opis"></textarea>
+              <div id="wordCount">0/150</div>
+            </div>
+            <div class="zapisywanie" style="margin-left: 120px">
+              <button type="submit" class="zapisz" id="zapisz">Zapisz Wyjazd</button>
+            </div>
           </div>
-          
-          <input id="budzet" class="input-panel input-budzet" type="number" placeholder="Koszt Atrakcji" />
-          <input id="koszty" class="input-panel input-koszt" type="number" placeholder="Koszt Wyjazdu" />
-          <input id="koszt-osoba" class="input-panel input-kosztnaosobe" type="text" placeholder="Koszt na Osobe" readonly />
-        </div>
-        <div class="textarea-container">
-          <textarea class="panel-opis" placeholder="opis"></textarea>
-          <div id="wordCount">0/150</div>
-        </div>
-        <div class="zapisywanie">
-          <button class="zapisz" id="zapisz-trase" onclick="zapiszTrase()">Zapisz Wyjazd</button>
         </div>
       </div>
     </div>
