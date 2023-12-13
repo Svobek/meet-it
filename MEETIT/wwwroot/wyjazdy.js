@@ -60,69 +60,107 @@ var div = document.createElement('div');
 }
 
 async function getWyjazd(id) {
-    try {
-        let response = await fetch('https://localhost:7168/User/GetAllTrackPoints?idTrack=' + id, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+    
+    
+    let response = await fetch('https://localhost:7168/User/GetAllTrackPoints?idTrack=' + id, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     }
-    );
+    )
 
-    let data = await response.json();
-    if (response.ok) {
-        console.log(data);
-        var markersArray = [];
-        for (var i = 0; i < data.length; i++){
-            var dane = await getPointInfo(data[i].points.xParm, data[i].points.yParm);
-            console.log(dane);
-            markersArray.push(
-                {
-                    'nazwa': data[i].points.pointName,
-                    'kraj': dane.kraj,
-                    'miasto': dane.miasto,
-                    'adres': dane.adres,
-                    'kod': dane.kod,
-                    'punkt': {lat:data[i].points.xParm, lng:data[i].points.yParm},
-                    'cena': data[i].pointValues.price,
-                    'data': data[i].pointValues.date,
-                    'godzina': data[i].pointValues.time
+        //let data12 = await response.json();
+        //if (response.ok) {*/
+        //create then and get data from response
+    response.json()
+        .then((data12) =>{ 
+            console.log(data12);
+            
+            
+            const orderPromises =  data12.forEach(point => {
+                getPointInfo(point)
+            }
+            );
+            Promise.all(orderPromises).then(() => {
+                
+                
+            }, () => {
+                setTimeout(() => {
+                    window.location.href = "nowywyjazd.html", 10000
                 });
-        }
-        sessionStorage.setItem("markersArray", JSON.stringify(markersArray));
-        console.log(markersArray);
-        window.location.href = "nowywyjazd.html";
-    }
+                
+                
+            }
+            );
+            console.log(orderPromises);
+            
+        });
+            
+}
 
+
+
+async function getPointInfo(point) {
+    try {
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(point.points.xParm, point.points.yParm);
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    var markersArray = sessionStorage.getItem("markersArray");
+                    if (markersArray == null) {
+                        markersArray = [];
+                    }
+                    else {
+                        markersArray = JSON.parse(markersArray);
+                    }
+                    console.log(results[1].address_components.length);
+                    for (var i = 0; i < results[1].address_components.length; i++) {
+                        var addressType = results[1].address_components[i].types[0];
+                        if (addressType === 'country') {
+                            var kraj = results[1].address_components[i].long_name;
+                        } else if (addressType === 'locality') {
+                            var miasto = results[1].address_components[i].long_name;
+                        } else if (addressType === 'route') {
+                            var ulica = results[1].address_components[i].long_name;
+                        } else if (addressType === 'postal_code') {
+                            var kod = results[1].address_components[i].long_name;
+                        }
+                    }
+                    
+                    markersArray.push(
+                        {
+                            'nazwa': point.points.pointName,
+                            'kraj': kraj,
+                            'miasto': miasto,
+                            'adres': ulica,
+                            'kod': kod,
+                            'punkt': { lat: point.points.xParm, lng: point.points.yParm },
+                            'cena': point.pointValues.price,
+                            'data': point.pointValues.date,
+                            'godzina': point.pointValues.time
+                        });
+                    sessionStorage.setItem("markersArray", JSON.stringify(markersArray));
+                    console.log(markersArray);
+                    return true;
+                }
+            } else {
+                console.log("Geocoder failed due to: " + status);
+                return false;
+            }
+        });
     }
     catch (error) {
-console.error('Error:', error);
+        console.error('Error:', error);
+        return false;
     }
 }
+
 
 
    
-//create function to get info about point from long and lat using goole maps api
-function getPointInfo(lat, lng) {
-    var geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            if (results[1]) {
-                var adres = results[1].formatted_address;
-                var kod = results[1].address_components[6].long_name;
-                var miasto = results[1].address_components[2].long_name;
-                var kraj = results[1].address_components[5].long_name;
-                
-                var dane = { adres: adres, kod: kod, miasto: miasto, kraj: kraj }
-               
-                return dane;
-            }
-        } else {
-            console.log("Geocoder failed due to: " + status);
-        }
-    });
-}
+
 
 
 

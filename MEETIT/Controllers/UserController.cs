@@ -252,8 +252,8 @@ namespace meetit.Controllers
             return (lastPointInTrackId.PointName);
         }
 
-        
 
+        [HttpGet]
         public IActionResult GetAllTrackPoints(int idTrack)
         {
             var trackPoints = _context.Points.Where(u => u.TrackID == idTrack).OrderBy(u=>u.PointInTrackId).ToList();

@@ -449,16 +449,19 @@ async function addPointValuesToDatabase() {
 }
 
 
-//add price of every marker and display it on koszty input in real time every time marker is added or removed
+//add price of every marker and display it on koszty input in real time every time marker is added or removed add separators and currency symbol
 function addPriceToInput() {
-var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
-    var sum = 0;
-
-    for (var i = 0; i < markersArray.length; i++) {    
-        sum += parseInt(markersArray[i].cena);
+    var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
+    var price = 0;
+    for (var i = 0; i < markersArray.length; i++) {
+        price += parseInt(markersArray[i].cena);
     }
-    document.getElementById('koszty').value = sum;
+    document.getElementById('koszty').value = price;
+    document.getElementById('koszty').value = document.getElementById('koszty').value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    document.getElementById('koszty').value += " zł";
 }
+
+
 
 
 

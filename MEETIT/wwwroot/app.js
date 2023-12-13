@@ -148,6 +148,7 @@ async function checkIfLoggedInTW() {
 function logout() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('login');
+    sessionStorage.clear();
     window.location.href = '/index.html';
 }
 
