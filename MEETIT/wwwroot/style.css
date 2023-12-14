@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Kalnia:wght@100&display=swap');
 
 ::-webkit-scrollbar {
   display: none;
@@ -56,6 +56,7 @@ body {
   padding: 0;
   display: flex;
   justify-content: space-between;
+  background: rgbA(255, 255, 255,0.1);
 }
 .content {
   display: flex;
@@ -122,12 +123,15 @@ h2 {
   background: none;
 }
 .link {
+  font-family: 'Kalnia', serif;
+  font-weight: 750;
+  font-size: 20px;
   text-decoration: none;
   color: white;
   background: none;
   position: relative;
   overflow: hidden;
-  width: 125px;
+  width: 200px;
   cursor: pointer;
 }
 .link::after {
@@ -342,6 +346,8 @@ button
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+
+
 }
 .logout
 {
@@ -384,7 +390,7 @@ box-shadow: 0px 0px 25px 0 rgba(0,0,0,0.5);
   color: white;
   display: flex;
   height: 100%;
-  width: 99%;
+  width: 100%;
   background: rgba(0, 0, 0, 0.3);
 }
 .pasek
@@ -400,18 +406,6 @@ box-shadow: 0px 0px 25px 0 rgba(0,0,0,0.5);
   justify-content: center;
   height: 100%;
   border-right: 1px solid white;
-}
-.lupa
-{
-  width: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid white;
-}
-.lupa:hover
-{
-  background: rgba(0, 0, 0, 0.5);
 }
 .lista-wyjazdow
 {
@@ -430,11 +424,11 @@ box-shadow: 0px 0px 25px 0 rgba(0,0,0,0.5);
 .opis
 {
   overflow: hidden;
-  width: 69%;
+  width: 61%;
 }
 .cel-wyjazdu
 {
-width: 7%;
+width: 8%;
 }
 .data-wyjazdu
 {
@@ -442,7 +436,7 @@ width: 7%;
 }
 .miejsce-wyjazdu
 {
-  width: 8%;
+  width: 20%;
 }
 .koszty-wyjazdu
 {
@@ -611,7 +605,6 @@ ol
 {
   padding-left: 15px;
   width: 20px;
-  height: 100%;
   margin-right: 10px;
   border-left: 2px solid white;
   padding-right: 10px;
