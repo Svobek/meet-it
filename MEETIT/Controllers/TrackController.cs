@@ -15,17 +15,18 @@ namespace meetit.Controllers
         // add track
         public IActionResult AddTrack([FromBody] Track track)
         {
+            
             var lastId = _context.Track.OrderByDescending(u => u.idTrack).FirstOrDefault().idTrack;
             track.idTrack = lastId + 1;
             if (track == null)
             {
                 return BadRequest("Invalid track data");
             }
-
+            
             _context.Track.Add(track);
             _context.SaveChanges();
-
             return Ok(track.idTrack);
+
         }
        
 

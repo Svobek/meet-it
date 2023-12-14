@@ -47,7 +47,7 @@ button.addEventListener('click', function() {
                 'punkt': JSON.parse(sessionStorage.getItem('punkt')),
                 'cena': document.getElementById('kosz-atrakcji').value,
                 'data': document.getElementById('data-startu-wyjazdu').value,
-                'godzina': document.getElementById('czas-startu-wyjazdu').value
+                'godzina': document.getElementById('czas-startu-wyjazdu').value  
             });
 
         sessionStorage.setItem('markersArray', JSON.stringify(markersArray));
@@ -180,9 +180,13 @@ window.initAutocomplete = initAutocomplete;
 //write function to load list on page load
 window.onload = function () {
     var trackname = sessionStorage.getItem('trackName');
+    var description = sessionStorage.getItem('opis');
     console.log();
     if (trackname != null) {
         document.getElementById('cel').value = trackname;
+    }
+    if (description != null) {
+        document.getElementById('opis').value = description;
     }
   var markersArray = JSON.parse(sessionStorage.getItem('markersArray'));
   if (markersArray == null) {
@@ -323,6 +327,7 @@ function addRouteToDatabase() {
     
     var routeName = {
         'Name': document.getElementById('cel').value,
+        'descriptions': document.getElementById('opis').value
     }
     //if cel is null dont add to database
     if (document.getElementById('cel').value == '') {
@@ -457,8 +462,6 @@ function addPriceToInput() {
         price += parseInt(markersArray[i].cena);
     }
     document.getElementById('koszty').value = price;
-    document.getElementById('koszty').value = document.getElementById('koszty').value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    document.getElementById('koszty').value += " zł";
 }
 
 

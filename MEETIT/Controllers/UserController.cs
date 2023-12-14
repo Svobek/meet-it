@@ -215,7 +215,7 @@ namespace meetit.Controllers
                 pointsF[i] = GetFirstTrackPointName(tracks[i].idTrack).pointName;
                 dates[i] = GetFirstTrackPointName(tracks[i].idTrack).pointValue;
                 pointsL[i] = GetLastTrackPointName(tracks[i].idTrack);
-                result[i] = new { tracks[i].idTrack, tracks[i].Name, date= dates[i], FPointName = pointsF[i], LPointName = pointsL[i] };
+                result[i] = new { tracks[i].idTrack, tracks[i].Name, date= dates[i], FPointName = pointsF[i], LPointName = pointsL[i] , opis = tracks[i].descriptions };
             }
             return Ok(result);
         }

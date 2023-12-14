@@ -41,13 +41,9 @@ var div = document.createElement('div');
     var div4 = document.createElement('div');
     div4.className = 'info miejsce-wyjazdu';
     div4.innerHTML = wyjazd.fPointName;
-    var div5 = document.createElement('div');
-    div5.className = 'info ilosc-osob';
     var div6 = document.createElement('div');
     div6.className = 'info opis';
-    var div7 = document.createElement('div');
-    div7.id = "lupa";
-    div7.className = 'lupa';
+    div6.innerHTML = wyjazd.opis;
     //check if wyjazd.date is today
     var today = new Date();
     var dd = today.getDate();
@@ -71,9 +67,8 @@ var div = document.createElement('div');
     div1.appendChild(div2);
     div1.appendChild(div3);
     div1.appendChild(div4);
-    div1.appendChild(div5);
     div1.appendChild(div6);
-    div.appendChild(div7);
+    
     wyjazdyDiv.appendChild(div);
     
 }
@@ -172,6 +167,7 @@ document.getElementById('lista-wyjazdow').addEventListener('click', function (e)
     var id = e.target.parentElement.parentElement.id;
     var nazwa = e.target.parentElement.children[0].innerHTML;
     sessionStorage.setItem("trackName", nazwa);
+    sessionStorage.setItem("opis", e.target.parentElement.children[4].innerHTML);
     if (id != "") {
         getWyjazd(id);
     }

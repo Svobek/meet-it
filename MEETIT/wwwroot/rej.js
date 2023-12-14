@@ -55,7 +55,7 @@ function addUser() {
         return response.json();
     })*/
     .then(response => {
-        console.log('User added successfully:', data);
+        console.log('User added successfully:', response);
         alert('Konto utworzone');
         window.location.href = 'logowanie.html';
     }) 
