@@ -360,6 +360,8 @@ button
 /*----------------------------------------wyjazdy--------------------------------------------------*/
 .twoje-wyjazdy
 {
+    font-weight: 900;
+  font-family: kalnia;
   background: linear-gradient(
     to left,
     rgba(255,255,255,0.05),
