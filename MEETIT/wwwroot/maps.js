@@ -330,7 +330,7 @@ function addRouteToDatabase() {
     }
     else {
         console.log(routeName);
-        fetch('https://meeetit.azurewebsites.net/Track/AddTrack', {
+        fetch('https://meet-it.azurewebsites.net/Track/AddTrack', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -366,7 +366,7 @@ async function addMarkersToDatabase() {
                 'PointName': markersArray[i].nazwa
             }
             console.log(marker);
-            let response = await fetch('https://meeetit.azurewebsites.net/Point/AddPoint', {
+            let response = await fetch('https://meet-it.azurewebsites.net/Point/AddPoint', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -400,7 +400,7 @@ var userTrack = {
         'isAdmin': "1"
     }
     console.log(userTrack);
-    fetch('https://meeetit.azurewebsites.net/User/ConnectUserAndTrack', {
+    fetch('https://meet-it.azurewebsites.net/User/ConnectUserAndTrack', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -430,7 +430,7 @@ async function addPointValuesToDatabase() {
                 'time': String(markersArray[i].godzina)+":00"
             }
             console.log(pointValues);
-            let response = await fetch('https://meeetit.azurewebsites.net/Point/AddPointValues', {
+            let response = await fetch('https://meet-it.azurewebsites.net/Point/AddPointValues', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -488,7 +488,7 @@ function addUsersTrackToDatabase() {
         'isAdmin': "0"
     }
     console.log(userTrack);
-    fetch('https://meeetit.azurewebsites.net/User/ConnectUserAndTrack', {
+    fetch('https://meet-it.azurewebsites.net/User/ConnectUserAndTrack', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ function validatePassword(password) {
 
 
 function addUser() {
-    var apiUrl = 'https://meeetit.azurewebsites.net/User/AddUser/';
+    var apiUrl = 'https://meet-it.azurewebsites.net/User/AddUser/';
 
     var loginValue = document.getElementById('user').value;
     var passwordValue = document.getElementById('password').value;

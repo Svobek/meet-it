@@ -4,7 +4,7 @@ window.onload = getWyjazdy();
 async function getWyjazdy() {
     var userid = sessionStorage.getItem("userId");
     try {
-        let response = await fetch('https://localhost:7168/User/GetTrackNames?idUsers=' +userid, {
+        let response = await fetch('https://meet-it.azurewebsites.net/User/GetTrackNames?idUsers=' +userid, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ var div = document.createElement('div');
 async function getWyjazd(id) {
     
     
-    let response = await fetch('https://localhost:7168/User/GetAllTrackPoints?idTrack=' + id, {
+    let response = await fetch('https://meet-it.azurewebsites.net/User/GetAllTrackPoints?idTrack=' + id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

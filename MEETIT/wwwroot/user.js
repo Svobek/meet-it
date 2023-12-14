@@ -12,7 +12,7 @@ async function onPageLoad() {
   try {
     const token = sessionStorage.getItem("token");
     let apiUrl =
-      "https://meeetit.azurewebsites.net/User/CheckToken?token=" + token;
+      "https://meet-it.azurewebsites.net/User/CheckToken?token=" + token;
 
     let response = await fetch(apiUrl, {
       method: "GET",

@@ -100,7 +100,7 @@ setInterval(aktualizujCzas, 1000);
     async function checkIfLoggedInNW() {
         try {
             const token = sessionStorage.getItem('token');
-            let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
+            let apiUrl = 'https://meet-it.azurewebsites.net/User/CheckToken?token=' + token;
 
             let response = await fetch(apiUrl, {
                 method: 'GET',
@@ -125,7 +125,7 @@ setInterval(aktualizujCzas, 1000);
 async function checkIfLoggedInTW() {
     try {
         const token = sessionStorage.getItem('token');
-        let apiUrl = 'https://meeetit.azurewebsites.net/User/CheckToken?token=' + token;
+        let apiUrl = 'https://meet-it.azurewebsites.net/User/CheckToken?token=' + token;
 
         let response = await fetch(apiUrl, {
             method: 'GET',

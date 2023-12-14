@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function loginUser() {
     try {
-        let apiUrl = 'https://meeetit.azurewebsites.net/User/Login/';
+        let apiUrl = 'https://meet-it.azurewebsites.net/User/Login/';
         let loginValue = document.getElementById('loginUser').value;
         let passwordValue = document.getElementById('loginPassword').value;
         let loginInfoDiv = document.getElementById('login-info');
@@ -41,7 +41,7 @@ async function loginUser() {
 
         if (response.status === 200) {
             sessionStorage.setItem('token', data);
-            let userResponse = await fetch('https://meeetit.azurewebsites.net/User/GetUserByLogin?login=' + loginValue);
+            let userResponse = await fetch('https://meet-it.azurewebsites.net/User/GetUserByLogin?login=' + loginValue);
             let userData = await userResponse.json();
             sessionStorage.setItem('userId', userData);
             sessionStorage.setItem('login', loginValue);

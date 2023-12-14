@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
                              policy =>
                              {
-                          policy.WithOrigins("https://meeetit.azurewebsites.net")
+                          policy.WithOrigins("https://meet-it.azurewebsites.net")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                       });
