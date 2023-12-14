@@ -58,7 +58,7 @@ var div = document.createElement('div');
     }
     today = yyyy + '-' + mm + '-' + dd;
     if (today == wyjazd.date) {
-        div.style.backgroundColor="red";
+        div.style.backgroundColor ="rgba(255, 0, 0,0.5)";
     }
 
     
@@ -166,8 +166,10 @@ window.onload = sessionStorage.removeItem("markersArray");
 document.getElementById('lista-wyjazdow').addEventListener('click', function (e) {
     var id = e.target.parentElement.parentElement.id;
     var nazwa = e.target.parentElement.children[0].innerHTML;
+    var opis = e.target.parentElement.children[3].innerHTML;
+    console.log(opis);
     sessionStorage.setItem("trackName", nazwa);
-    sessionStorage.setItem("opis", e.target.parentElement.children[4].innerHTML);
+    sessionStorage.setItem("opis",opis);
     if (id != "") {
         getWyjazd(id);
     }

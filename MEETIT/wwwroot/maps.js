@@ -313,9 +313,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 //add function to display route on map on button click
 
 function displayRoute() {
+    if (directionsRenderer != null) {
+        directionsRenderer.setMap(null);
+    }
     var directionsService = new google.maps.DirectionsService;
     directionsRenderer = new google.maps.DirectionsRenderer;
-    directionsRenderer.setMap(null);
     directionsRenderer.setMap(map);
     calculateAndDisplayRoute(directionsService, directionsRenderer);
 }
