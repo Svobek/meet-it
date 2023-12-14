@@ -48,6 +48,25 @@ var div = document.createElement('div');
     var div7 = document.createElement('div');
     div7.id = "lupa";
     div7.className = 'lupa';
+    //check if wyjazd.date is today
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+    if (today == wyjazd.date) {
+        div.style.backgroundColor="red";
+    }
+
+    
+
     div.appendChild(div1);
     div1.appendChild(div2);
     div1.appendChild(div3);
@@ -68,41 +87,24 @@ async function getWyjazd(id) {
             'Content-Type': 'application/json',
         },
     }
-    )
+    );
+    let data12 = await response.json();
+    console.log(data12);
 
-        //let data12 = await response.json();
-        //if (response.ok) {*/
-        //create then and get data from response
-    response.json()
-        .then((data12) =>{ 
-            console.log(data12);
-            
-            
-            const orderPromises =  data12.forEach(point => {
-                getPointInfo(point)
-            }
-            );
-            Promise.all(orderPromises).then(() => {
-                
-                
-            }, () => {
-                setTimeout(() => {
-                    window.location.href = "nowywyjazd.html", 10000
-                });
-                
-                
-            }
-            );
-            console.log(orderPromises);
-            
-        });
-            
+    const orderPromises = data12.map(point => getPointInfo(point));
+    console.log(orderPromises);
+    await Promise.all(orderPromises).then(() => {
+        console.log("done");
+        window.location.href = "nowywyjazd.html";
+    });
+
+    
+   
 }
+    
 
-
-
-async function getPointInfo(point) {
-    try {
+function getPointInfo(point) {
+    return new Promise((resolve, reject) => {
         var geocoder = new google.maps.Geocoder();
         var latlng = new google.maps.LatLng(point.points.xParm, point.points.yParm);
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
@@ -143,21 +145,21 @@ async function getPointInfo(point) {
                         });
                     sessionStorage.setItem("markersArray", JSON.stringify(markersArray));
                     console.log(markersArray);
-                    return true;
+                    resolve(true);
                 }
             } else {
                 console.log("Geocoder failed due to: " + status);
-                return false;
+                reject(false);
             }
         });
     }
-    catch (error) {
-        console.error('Error:', error);
-        return false;
-    }
+    );
+
+    
 }
 
-
+//window onload clear markersArray in session storage
+window.onload = sessionStorage.removeItem("markersArray");
 
    
 

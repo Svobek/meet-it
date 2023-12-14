@@ -472,6 +472,67 @@ function zapiszTrase() {
 
 
 
+function addUsersTrackToDatabase() {
+    //get all elements from list listaUser
+    var list = document.getElementById('listaUser');
+    var listElements = list.getElementsByTagName('li');
+    var usersArray = [];
+    for (var i = 0; i < listElements.length; i++) {
+        usersArray.push(listElements[i].innerHTML);
+    }
+    console.log(usersArray);
+
+    var userTrack = {
+        'idUsers': JSON.parse(sessionStorage.getItem('userId')),
+        'idTracks': JSON.parse(sessionStorage.getItem('trackID')),
+        'isAdmin': "0"
+    }
+    console.log(userTrack);
+    fetch('https://meeetit.azurewebsites.net/User/ConnectUserAndTrack', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userTrack),
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    addMarkersToDatabase()
+}
+
+
+
+//add function to create new input in list listaUser
+function addNewUser() {
+    var list = document.getElementById('listaUser');
+    var li = document.createElement('li');
+    var input = document.createElement('input');
+    var img = document.createElement('img');
+    img.src = 'images/kosz.png';
+    //function to remove chosen element from list
+    function createClickListener(div) {
+        return function () {
+            div.remove();
+        };
+    }
+    img.addEventListener('click', createClickListener(li));
+    input.type = "text";
+    input.className = "input-user";
+    li.className = "li-user";
+    img.className = "img-user";
+    li.appendChild(input); // Dodaj input do li
+    li.appendChild(img); // Dodaj img do li
+    list.appendChild(li);
+}
+
+
+
+
 
 
 

@@ -129,7 +129,9 @@ app.MapControllerRoute(
     name: "User_Track",
        pattern: "{controller=User}/{action=GetAllTrackPoints}/{id?}");
 
-
+app.MapControllerRoute(
+       name: "User_Track4",
+       pattern: "{controller=User}/{action=AddUsersToTrack}/");
 
 
 
