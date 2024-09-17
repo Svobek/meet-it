@@ -7,5 +7,7 @@ Opiekun Dagmara Leśniewska
 Zespół:
 
 Michał Pawłowski - Frontend https://github.com/aJpaRmp
+
 Maciej Krause - Backend/wsparcie w JS https://github.com/Svobek
+
 Filip Pokorzyński - Backend/wsparcie w JS https://github.com/izmaell97
