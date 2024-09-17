@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("00112233445566778899AABBCCDDEEFF"))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(""))
     };
 });
 // Add services to the container.
