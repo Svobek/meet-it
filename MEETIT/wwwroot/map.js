@@ -13,7 +13,7 @@ function initMap() {
         maxZoom: 22,
         mapId: "",
       },
-      mapsApiKey: "AIzaSyB3ZQgxv25bFuG9dDT9t7Fz9_7M6C1enjY",
+      mapsApiKey: "",
       capabilities: {
         addressAutocompleteControl: true,
         mapDisplayControl: true,
